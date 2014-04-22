@@ -1,0 +1,17 @@
+#!/usr/bin/env perl
+
+use strict;
+use lib 'lib';
+use lib '../pegex-pm/lib';
+use Pegex::Parser;
+use Kwim::Grammar;
+use Kwim::HTML;
+
+
+my $kwim = do {local $/; <>};
+my $parser = Pegex::Parser->new(
+    grammar => 'Kwim::Grammar'->new,
+    receiver => "Kwim::HTML"->new,
+    # debug => 1,
+);
+print $parser->parse($kwim);
