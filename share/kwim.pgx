@@ -1,0 +1,102 @@
+document: block-top*
+
+block-top:
+  | block-comment
+  | line-comment
+# | heading
+# | list-unordered
+# | block-code
+  | title
+  | paragraph
+
+block-comment: /
+  HASH HASH HASH EOL
+  (
+    (: ANY*? EOL)*?
+  )
+  HASH HASH HASH EOL
+  line-blank?
+/
+
+line-comment: /
+  HASH SPACE? ( ANY*? ) EOL
+  line-blank?
+/
+
+paragraph:
+  paragraph-flow
+#   paragraph-hard
+
+# list-unordered: list-entry+
+# block-code: …
+
+title: /
+  ( text-line )
+  EQUAL{3,} EOL
+  line-blank?
+/
+
+paragraph: /
+  ( text-line+ )
+  line-blank?
+/
+
+text-markup: phrase-markup+
+
+phrase-markup:
+  | char-escape
+  | phrase-text
+  | phrase-bold
+  | phrase-emph
+  | phrase-code
+#   | phrase-link
+#   | char-next
+
+char-escape: / BACK ( ANY ) /
+
+phrase-text: /
+  ( [^ char-phrase-start]+ )
+/
+
+phrase-code:
+  GRAVE
+  ( !char-code ( phrase-text | char-next ) )*
+  GRAVE
+
+phrase-bold:
+  char-bold
+  ( !char-bold phrase-markup )+
+  char-bold
+
+phrase-emph:
+  char-emph
+  ( !char-emph phrase-markup )+
+  char-emph
+
+text-line: / (: [^ char-block-start NL ] ANY* NL ) /
+
+line-blank: / (: SPACE* NL ) /
+
+char-pref-start: / SPACE /
+char-list-start: / STAR /
+char-head-start: / EQUAL /
+char-comment-start: / EQUAL /
+
+char-block-start: /
+  char-pref-start
+  char-list-start
+  char-head-start
+  char-comment-start
+/
+
+char-bold: / STAR /
+char-emph: / STAR /
+char-code: / GRAVE /
+
+char-phrase-start: /
+  char-bold
+  char-emph
+  char-code
+/
+
+# vim: set lisp sw=2:
