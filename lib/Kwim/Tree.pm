@@ -18,6 +18,11 @@ sub got_title {
     $self->add_parse(title => $text);
 }
 
+sub got_block_verse {
+    my ($self, $text) = @_;
+    $self->add_parse(verse => $text);
+}
+
 sub got_paragraph {
     my ($self, $text) = @_;
     $self->add_parse(para => $text);

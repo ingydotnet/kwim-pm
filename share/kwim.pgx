@@ -7,6 +7,7 @@ block-top:
 # | list-unordered
 # | block-code
   | title
+  | block-verse
   | paragraph
 
 block-comment: /
@@ -23,9 +24,15 @@ line-comment: /
   line-blank?
 /
 
-paragraph:
-  paragraph-flow
-#   paragraph-hard
+block-verse: /
+  DOT DOT NL
+  ( text-line+ )
+  line-blank?
+/
+
+# paragraph:
+#   paragraph-flow
+# #   paragraph-hard
 
 # list-unordered: list-entry+
 # block-code: …
@@ -58,10 +65,11 @@ phrase-text: /
   ( [^ char-phrase-start]+ )
 /
 
-phrase-code:
+phrase-code: /
   GRAVE
-  ( !char-code ( phrase-text | char-next ) )*
+  ( [^ GRAVE]*? )
   GRAVE
+/
 
 phrase-bold:
   char-bold
