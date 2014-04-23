@@ -15,7 +15,7 @@ Kwim is a plain text markup language that converts to many formats:
 * AsciiDoc
 * MediaWiki
 
-The Kwim framwork is easily extensible, so adding new outputs is easy.
+The Kwim framework is easily extensible, so adding new outputs is easy.
 
 == What Makes Kwim Different
 

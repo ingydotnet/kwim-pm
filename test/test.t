@@ -39,8 +39,8 @@ Title = "Ingy's Test";
 
 Label = 'Kwim to ByteCode - $BlockLabel'
 *kwim.parse('Byte') == *byte
-# Label = 'Kwim to HTML - $BlockLabel'
-# *kwim.parse('HTML') == *html
+Label = 'Kwim to HTML - $BlockLabel'
+*kwim.parse('HTML') == *html
 
 === Title and Paragraph
 --- kwim
@@ -187,3 +187,16 @@ Paragraph text
  preformatted text
 -pref
 
+--- html
+<h2>Level 2 Header</h2>
+<p>
+Paragraph text.
+</p>
+<h3>Level 3 Header Multi Line</h3>
+<p>
+Paragraph text
+</p>
+<h4>Level 4 Header</h4>
+<pre>
+preformatted text
+</pre>
