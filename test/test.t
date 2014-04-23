@@ -26,7 +26,7 @@ sub parse {
         receiver => "Kwim::$emitter"->new,
         # debug => 1,
     );
-    # XXX($parser->grammar->tree);
+    ($parser->grammar->tree);
     str $parser->parse($kwim);
 }
 
@@ -39,8 +39,8 @@ Title = "Ingy's Test";
 
 Label = 'Kwim to ByteCode - $BlockLabel'
 *kwim.parse('Byte') == *byte
-Label = 'Kwim to HTML - $BlockLabel'
-*kwim.parse('HTML') == *html
+# Label = 'Kwim to HTML - $BlockLabel'
+# *kwim.parse('HTML') == *html
 
 === Title and Paragraph
 --- kwim
@@ -154,3 +154,36 @@ I like *`pi`*.
 <p>
 I like <b><tt>pi</tt></b>.
 </p>
+
+=== Headers
+--- kwim
+== Level 2 Header ==
+Paragraph text.
+
+\=== Level 3 Header
+Multi Line
+
+Paragraph text
+
+\==== Level 4 Header
+  preformatted text
+--- byte
++head2
+ Level 2 Header
+-head2
++para
+ Paragraph text.
+-para
++head3
+ Level 3 Header\nMulti Line
+-head3
++para
+ Paragraph text
+-para
++head4
+ Level 4 Header
+-head4
++pref
+ preformatted text
+-pref
+

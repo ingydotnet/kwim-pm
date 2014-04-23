@@ -13,6 +13,21 @@ sub got_line_comment {
     $self->add(comment => $text);
 }
 
+sub got_block_head {
+    my ($self, $got) = @_;
+    my $marker = shift @$got;
+    my ($text) = grep defined, @$got;
+    chomp $text;
+    my $level = length $marker;
+    $self->add("head$level" => $text);
+}
+
+sub got_block_pref {
+    my ($self, $text) = @_;
+    $text =~ s/^  //gm;
+    $self->add("pref" => $text);
+}
+
 sub got_title {
     my ($self, $text) = @_;
     $self->add_parse(title => $text);

@@ -3,9 +3,9 @@ document: block-top*
 block-top:
   | block-comment
   | line-comment
-# | heading
-# | list-unordered
-# | block-code
+  | block-head
+  | block-pref
+# | block-list
   | title
   | block-verse
   | paragraph
@@ -24,8 +24,25 @@ line-comment: /
   line-blank?
 /
 
+block-head: /
+  ( EQUAL{1,4} ) SPACE+ (:
+    ( ANY+? ) SPACE+ EQUAL+ EOL
+  | ( ANY+ NL (: [^ WS ] ANY* EOL )* [^ WS ] ANY*? ) SPACE+ EQUAL+ EOL
+  | ( ANY+ NL (: [^ WS ] ANY* EOL )*) (= [ char-block-start ] | EOL | EOS)
+  ) line-blank?
+/
+
+block-pref: /
+  (
+    (:
+      SPACE SPACE ANY* EOL
+    | line-blank
+    )+
+  )
+/
+
 block-verse: /
-  DOT DOT NL
+  DOT NL
   ( text-line+ )
   line-blank?
 /
