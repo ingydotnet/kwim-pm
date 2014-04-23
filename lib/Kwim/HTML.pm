@@ -114,7 +114,6 @@ sub transform_verse {
     $text =~ s/(\s{2,})/'&nbsp;' x length($1)/ge;
     $text =~ s{\n}{<br/>\n}g;
     return $text;
-...
 }
 
 sub transform_head {
@@ -123,7 +122,6 @@ sub transform_head {
     $text = escape_html($text);
     $text =~ s/\n/ /g;
     return $text;
-...
 }
 
 sub render_comment {
