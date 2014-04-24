@@ -1,0 +1,109 @@
+document: block-top*
+
+block-top:
+  | block-head
+  | block-pref
+  | block-list
+  | block-para
+
+block-head: /
+  ( EQUAL{1,4} ) SPACE+ (:
+    ( ANY+? ) SPACE+ EQUAL+ EOL
+  | ( ANY+ NL (: [^ WS ] ANY* EOL )* [^ WS ] ANY*? ) SPACE+ EQUAL+ EOL
+  | ( ANY+ NL (: [^ WS ] ANY* EOL )*) (= [ char-block-start ] | EOL | EOS)
+  ) line-blank?
+/
+
+block-pref: /
+  (
+    (:
+      SPACE SPACE ANY* EOL
+    | line-blank
+    )+
+  )
+/
+
+block-verse: /
+  DOT NL
+  ( text-line+ )
+  line-blank?
+/
+
+# paragraph:
+#   paragraph-flow
+# #   paragraph-hard
+
+# list-unordered: list-entry+
+# block-code: …
+
+title: /
+  ( text-line )
+  EQUAL{3,} EOL
+  line-blank?
+/
+
+paragraph: /
+  ( text-line+ )
+  line-blank?
+/
+
+text-markup: phrase-markup+
+
+phrase-markup:
+  | char-escape
+  | phrase-text
+  | phrase-bold
+  | phrase-emph
+  | phrase-code
+#   | phrase-link
+#   | char-next
+
+char-escape: / BACK ( ANY ) /
+
+phrase-text: /
+  ( [^ char-phrase-start]+ )
+/
+
+phrase-code: /
+  GRAVE
+  ( [^ GRAVE]*? )
+  GRAVE
+/
+
+phrase-bold:
+  char-bold
+  ( !char-bold phrase-markup )+
+  char-bold
+
+phrase-emph:
+  char-emph
+  ( !char-emph phrase-markup )+
+  char-emph
+
+text-line: / (: [^ char-block-start NL ] ANY* NL ) /
+
+line-blank: / (: SPACE* NL ) /
+
+char-pref-start: / SPACE /
+char-list-start: / STAR /
+char-head-start: / EQUAL /
+char-comment-start: / EQUAL /
+
+char-block-start: /
+  char-pref-start
+  char-list-start
+  char-head-start
+  char-comment-start
+/
+
+char-bold: / STAR /
+char-emph: / STAR /
+char-code: / GRAVE /
+
+char-phrase-start: /
+  char-bold
+  char-emph
+  char-code
+/
+
+# vim: set lisp sw=2:
