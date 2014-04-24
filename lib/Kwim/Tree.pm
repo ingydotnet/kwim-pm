@@ -28,7 +28,7 @@ sub got_block_pref {
     $self->add("pref" => $text);
 }
 
-sub got_title {
+sub got_block_title {
     my ($self, $text) = @_;
     $self->add_parse(title => $text);
 }
@@ -38,7 +38,7 @@ sub got_block_verse {
     $self->add_parse(verse => $text);
 }
 
-sub got_paragraph {
+sub got_block_para {
     my ($self, $text) = @_;
     $self->add_parse(para => $text);
 }

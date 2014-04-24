@@ -6,9 +6,9 @@ block-top:
   | block-head
   | block-pref
 # | block-list
-  | title
+  | block-title
   | block-verse
-  | paragraph
+  | block-para
 
 block-comment: /
   HASH HASH HASH EOL
@@ -47,20 +47,20 @@ block-verse: /
   line-blank?
 /
 
-# paragraph:
+# block-para:
 #   paragraph-flow
 # #   paragraph-hard
 
 # list-unordered: list-entry+
 # block-code: …
 
-title: /
+block-title: /
   ( text-line )
   EQUAL{3,} EOL
   line-blank?
 /
 
-paragraph: /
+block-para: /
   ( text-line+ )
   line-blank?
 /
