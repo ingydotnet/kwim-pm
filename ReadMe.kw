@@ -54,9 +54,10 @@ Here are a few points:
 
   Kwim is written using the Pegex parser framework. This provides 2 very
   powerful concepts. Firstly, that Kwim language is defined in a very simple
-  PEG topdown grammar. That means it is easy to maintain and extend. Second,
-  Pegex parsers work in many languages. That means that you can use Pegex
-  natively in languages like Ruby, JavaScript, Perl, Python and many others.
+  PEG topdown grammar. That means it is easy to grok, maintain and extend.
+  Second, Pegex parsers work in many languages. That means that you can use
+  Pegex natively in languages like Ruby, JavaScript, Perl, Python and many
+  others.
 
 * Comments and blank lines:
 
@@ -83,7 +84,9 @@ markup.
 
 The important thing in all this is that we be able to reverse the meaning for
 edge cases. ie We need a way to make markup characters be viewed as regular
-characters. Kwim uses a backslash before a character to make it not be seen as markup. For instance this text "\*not bold\*" is not bold because it was written like this: `"\*not bold\*"`.
+characters. Kwim uses a backslash before a character to make it not be seen as
+markup. For instance this text "\*not bold\*" is not bold because it was
+written like this: `"\*not bold\*"`.
 
 Kwim has a document model that views things as *blocks* and *phrases*. This is
 very similar to HTML's *DIV* and *SPAN* concepts. Kwim views a document as a
