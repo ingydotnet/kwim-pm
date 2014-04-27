@@ -34,8 +34,9 @@ __DATA__
 
 %TestML 0.1.0
 
-Title = "Ingy's Test";
-# Plan = 4;
+# Diff = 1
+Title = "Ingy's Test"
+# Plan = 4
 
 Label = 'Kwim to ByteCode - $BlockLabel'
 *kwim.parse('Byte') == *byte
@@ -60,10 +61,7 @@ FREND
 <h1 class="title">
 My Title
 </h1>
-<p>
-O HAI
-FREND
-</p>
+<p>O HAI FREND</p>
 
 === Line Comment
 --- kwim
@@ -84,9 +82,7 @@ Paragraph text.
 --- html
 <!-- This is a comment line. -->
 <!-- Another. Eat next blank line. -->
-<p>
-Paragraph text.
-</p>
+<p>Paragraph text.</p>
 
 === Block Comment
 --- kwim
@@ -117,9 +113,7 @@ Comment line 1
 
 
 -->
-<p>
-Paragraph
-</p>
+<p>Paragraph</p>
 
 === Bold Phrase
 --- kwim
@@ -133,9 +127,7 @@ I *like* pie.
   pie.
 -para
 --- html
-<p>
-I <b>like</b> pie.
-</p>
+<p>I <b>like</b> pie.</p>
 
 === Bold Code Phrase
 --- kwim
@@ -151,9 +143,7 @@ I like *`pi`*.
  .
 -para
 --- html
-<p>
-I like <b><tt>pi</tt></b>.
-</p>
+<p>I like <b><tt>pi</tt></b>.</p>
 
 === Headers
 --- kwim
@@ -189,14 +179,67 @@ Paragraph text
 
 --- html
 <h2>Level 2 Header</h2>
-<p>
-Paragraph text.
-</p>
+<p>Paragraph text.</p>
 <h3>Level 3 Header Multi Line</h3>
-<p>
-Paragraph text
-</p>
+<p>Paragraph text</p>
 <h4>Level 4 Header</h4>
-<pre>
-preformatted text
+<pre>preformatted text
 </pre>
+
+=== Lists
+--- kwim
+Paragraph 1
+* List item 1
+  * Sublist a
+* List
+  item
+  2
+* List item 3
+* List item 4
+    preformatted
+Paragraph 2
+--- byte
++para
+ Paragraph 1
+-para
++list
++item
+ List item 1
++list
++item
+ Sublist a
+-item
+-list
+-item
++item
+ List\nitem\n2
+-item
++item
+ List item 3
+-item
++item
+ List item 4
++pref
+ preformatted
+-pref
+-item
+-list
++para
+ Paragraph 2
+-para
+--- html
+<p>Paragraph 1</p>
+<ul>
+<li>List item 1
+<ul>
+<li>Sublist a</li>
+</ul>
+</li>
+<li>List item 2</li>
+<li>List item 3</li>
+<li>List item 4
+<pre>preformatted
+</pre>
+</li>
+</ul>
+<p>Paragraph 2</p>

@@ -28,6 +28,22 @@ sub got_block_pref {
     $self->add("pref" => $text);
 }
 
+sub got_block_list {
+    my ($self, $text) = @_;
+    my @items = map {s/^  //gm; $_} split /^\*\ /m, $text;
+    shift @items;
+    my $items = [
+        map {
+            my $item = $self->add_parse(item => $_, 'block-list-item');
+            if ($item->{item}[0]{para}) {
+                $item->{item}[0] = $item->{item}[0]{para}[0];
+            }
+            $item;
+        } @items
+    ];
+    +{ list => $items };
+}
+
 sub got_block_title {
     my ($self, $text) = @_;
     $self->add_parse(title => $text);
@@ -64,18 +80,23 @@ sub add {
 }
 
 sub add_parse {
-    my ($self, $tag, $text) = @_;
-    +{ $tag => $self->parse($text) };
+    my ($self, $tag, $text, $start) = @_;
+    +{ $tag => $self->parse($text, $start) };
 }
 
 sub parse {
     my ($self, $text, $start) = @_;
-    chomp $text;
-    $start ||= 'text-markup';
+    if (not $start) {
+        $start = 'text-markup';
+        chomp $text;
+    }
+    my @debug = ();
+    # @debug = (debug => 1);
+    # @debug = (debug => 1) if $start eq 'block-list-item';
     my $parser = Pegex::Parser->new(
         grammar => 'Kwim::Grammar'->new(start => $start),
         receiver => 'Kwim::Tree'->new,
-        # debug => 1,
+        @debug,
     );
     $parser->parse($text, $start);
 }

@@ -34,14 +34,22 @@ my $info = {
     },
     pref => {
         tag => 'pre',
-        style => 'block',
+        style => 'pref',
     },
     comment => {
         render => 'render_comment',
     },
+    list => {
+        tag => 'ul',
+        style => 'block',
+    },
+    item => {
+        tag => 'li',
+        style => 'item',
+    },
     para => {
         tag => 'p',
-        style => 'block',
+        style => 'para',
     },
     verse => {
         tag => 'p',
@@ -87,22 +95,48 @@ sub render_tag {
         $node = $self->$transform($node);
     }
     if ($style eq 'block') {
-        "<$tag$attrs>\n" . $self->render($node) . "\n</$tag>\n";
+        my $inside = $self->render($node);
+        chomp $inside;
+        "<$tag$attrs>\n$inside\n</$tag>\n";
+    }
+    elsif ($style eq 'para') {
+        my $inside = $self->render($node);
+        chomp $inside;
+        my $spacer = '';
+        if ($inside =~ /\n/) {
+            $spacer = "\n";
+        }
+        "<$tag$attrs>$spacer$inside$spacer</$tag>\n";
     }
     elsif ($style eq 'block-line') {
         "<$tag$attrs>" . $self->render($node) . "</$tag>\n";
     }
+    elsif ($style eq 'item') {
+        my $inside = $self->render($node);
+        $inside =~ s/(.)(<(?:ul|pre|p)(?: |>))/$1\n$2/;
+        my $spacer = '';
+        if ($inside =~ /\A</) {
+            $spacer = "\n";
+        }
+        "<$tag$attrs>$spacer$inside$spacer</$tag>\n";
+    }
+    elsif ($style eq 'pref') {
+        chomp $node;
+        "<$tag>$node\n</$tag>\n";
+    }
     elsif ($style eq 'phrase') {
-        "<$tag$attrs>" . $self->render($node) . "</$tag>";
+        my $inside = $self->render($node);
+        "<$tag$attrs>$inside</$tag>";
     }
     else {
-        die;
+        die "No handler for style '$style'";
     }
 }
 
 sub render_text {
     my ($self, $text) = @_;
     chomp $text;
+    $text =~ s/\n/ /g;
     escape_html($text);
 }
 

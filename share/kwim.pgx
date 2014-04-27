@@ -5,7 +5,7 @@ block-top:
   | line-comment
   | block-head
   | block-pref
-# | block-list
+  | block-list
   | block-title
   | block-verse
   | block-para
@@ -41,6 +41,37 @@ block-pref: /
   )
 /
 
+block-list: /(
+  line-list-item
+  (: line-list-item | line-indented )*
+  line-blank?
+)/
+
+line-list-item: /
+  STAR SPACE ANY* EOL
+/
+
+block-list-item: (
+  | block-comment
+  | line-comment
+  | block-head
+  | block-pref
+  | block-list
+  | block-title
+  | block-verse
+  | block-para
+)*
+
+line-indented: /
+  SPACE SPACE ANY* EOL
+/
+
+block-title: /
+  ( text-line )
+  EQUAL{3,} EOL
+  line-blank?
+/
+
 block-verse: /
   DOT NL
   ( text-line+ )
@@ -53,12 +84,6 @@ block-verse: /
 
 # list-unordered: list-entry+
 # block-code: …
-
-block-title: /
-  ( text-line )
-  EQUAL{3,} EOL
-  line-blank?
-/
 
 block-para: /
   ( text-line+ )
