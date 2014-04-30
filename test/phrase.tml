@@ -1,0 +1,29 @@
+=== Bold Phrase
+--- kwim
+I *like* pie.
+--- byte
++para
+ I 
++bold
+ like
+-bold
+  pie.
+-para
+--- html
+<p>I <b>like</b> pie.</p>
+
+=== Bold Code Phrase
+--- kwim
+I like *`pi`*.
+--- byte
++para
+ I like 
++bold
++code
+ pi
+-code
+-bold
+ .
+-para
+--- html
+<p>I like <b><tt>pi</tt></b>.</p>

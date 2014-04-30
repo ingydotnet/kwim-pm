@@ -1,0 +1,81 @@
+=== Title and Paragraph
+--- kwim
+My Title
+\========
+
+O HAI
+FREND
+--- byte
++title
+ My Title
+-title
++para
+ O HAI\nFREND
+-para
+--- html
+<h1 class="title">
+My Title
+</h1>
+<p>O HAI FREND</p>
+
+=== Line Comment
+--- kwim
+\# This is a comment line.
+\# Another. Eat next blank line.
+
+Paragraph text.
+--- byte
++comment
+ This is a comment line.
+-comment
++comment
+ Another. Eat next blank line.
+-comment
++para
+ Paragraph text.
+-para
+--- html
+<!-- This is a comment line. -->
+<!-- Another. Eat next blank line. -->
+<p>Paragraph text.</p>
+
+=== Headers
+--- kwim
+== Level 2 Header ==
+Paragraph text.
+
+\=== Level 3 Header
+Multi Line
+
+Paragraph text
+
+\==== Level 4 Header
+  preformatted text
+--- byte
++head2
+ Level 2 Header
+-head2
++para
+ Paragraph text.
+-para
++head3
+ Level 3 Header\nMulti Line
+-head3
++para
+ Paragraph text
+-para
++head4
+ Level 4 Header
+-head4
++pref
+ preformatted text
+-pref
+
+--- html
+<h2>Level 2 Header</h2>
+<p>Paragraph text.</p>
+<h3>Level 3 Header Multi Line</h3>
+<p>Paragraph text</p>
+<h4>Level 4 Header</h4>
+<pre>preformatted text
+</pre>
