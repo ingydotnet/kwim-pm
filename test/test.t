@@ -26,7 +26,7 @@ sub parse {
         receiver => "Kwim::$emitter"->new,
         # debug => 1,
     );
-    ($parser->grammar->tree);
+    # XXX($parser->grammar->tree);
     str $parser->parse($kwim);
 }
 
@@ -35,7 +35,6 @@ __DATA__
 %TestML 0.1.0
 
 # Diff = 1
-Title = "Ingy's Test"
 # Plan = 4
 
 Label = 'Kwim to ByteCode - $BlockLabel'
@@ -243,3 +242,35 @@ Paragraph 2
 </li>
 </ul>
 <p>Paragraph 2</p>
+
+=== Blank Lines
+--- kwim
+
+
+Paragraph 1
+
+
+Paragraph 2
+
+
+\
+--- byte
+=blank
+=blank
++para
+ Paragraph 1
+-para
+=blank
++para
+ Paragraph 2
+-para
+=blank
+=blank
+--- html
+<br/>
+<br/>
+<p>Paragraph 1</p>
+<br/>
+<p>Paragraph 2</p>
+<br/>
+<br/>

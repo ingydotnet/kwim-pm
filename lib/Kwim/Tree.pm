@@ -3,6 +3,11 @@ package Kwim::Tree;
 use base 'Pegex::Tree';
 use XXX -with => 'YAML::XS';
 
+sub got_block_blank {
+    my ($self, $text) = @_;
+    $self->add('blank');
+}
+
 sub got_block_comment {
     my ($self, $text) = @_;
     $self->add(comment => $text);

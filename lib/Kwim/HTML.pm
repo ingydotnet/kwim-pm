@@ -47,6 +47,10 @@ my $info = {
         tag => 'li',
         style => 'item',
     },
+    blank => {
+        tag => 'br',
+        style => 'single',
+    },
     para => {
         tag => 'p',
         style => 'para',
@@ -127,6 +131,9 @@ sub render_tag {
     elsif ($style eq 'phrase') {
         my $inside = $self->render($node);
         "<$tag$attrs>$inside</$tag>";
+    }
+    elsif ($style eq 'single') {
+        "<$tag/>\n";
     }
     else {
         die "No handler for style '$style'";

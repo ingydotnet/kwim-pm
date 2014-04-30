@@ -11,7 +11,12 @@ sub final {
 sub render_tag {
     my ($self, $hash) = @_;
     my ($tag, $node) = each %$hash;
-    "+$tag\n" . $self->render($node) . "-$tag\n";
+    if (not defined $node) {
+        "=$tag\n"
+    }
+    else {
+        "+$tag\n" . $self->render($node) . "-$tag\n";
+    }
 }
 
 sub render_text {

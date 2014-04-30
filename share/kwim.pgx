@@ -1,6 +1,7 @@
 document: block-top*
 
 block-top:
+  | block-blank
   | block-comment
   | line-comment
   | block-head
@@ -9,6 +10,10 @@ block-top:
   | block-title
   | block-verse
   | block-para
+
+block-blank: /
+  line-blank
+/
 
 block-comment: /
   HASH HASH HASH EOL
@@ -28,22 +33,23 @@ block-head: /
   ( EQUAL{1,4} ) SPACE+ (:
     ( ANY+? ) SPACE+ EQUAL+ EOL
   | ( ANY+ NL (: [^ WS ] ANY* EOL )* [^ WS ] ANY*? ) SPACE+ EQUAL+ EOL
-  | ( ANY+ NL (: [^ WS ] ANY* EOL )*) (= [ char-block-start ] | EOL | EOS)
+  | ( ANY+ NL (: [^ WS ] ANY* EOL )*) (= [ start-block ] | EOL | EOS)
   ) line-blank?
 /
 
 block-pref: /
   (
     (:
+      line-blank*
       SPACE SPACE ANY* EOL
-    | line-blank
     )+
   )
+  line-blank?
 /
 
 block-list: /(
   line-list-item
-  (: line-list-item | line-indented )*
+  (: line-list-item | line-blank* line-indented )*
   line-blank?
 )/
 
@@ -52,6 +58,7 @@ line-list-item: /
 /
 
 block-list-item: (
+  | block-blank
   | block-comment
   | line-comment
   | block-head
@@ -123,24 +130,24 @@ phrase-emph:
   ( !char-emph phrase-markup )+
   char-emph
 
-text-line: / (: [^ char-block-start NL ] ANY* NL ) /
+text-line: / (: [^ start-block NL ] ANY* NL ) /
 
-line-blank: / (: SPACE* NL ) /
+line-blank: / (: SPACE* EOL ) /
 
-char-pref-start: / SPACE /
-char-list-start: / STAR /
-char-head-start: / EQUAL /
-char-comment-start: / EQUAL /
+start-pref: / SPACE /
+start-list: / STAR /
+start-head: / EQUAL /
+start-comment: / EQUAL /
 
-char-block-start: /
-  char-pref-start
-  char-list-start
-  char-head-start
-  char-comment-start
+start-block: /
+  start-pref
+  start-list
+  start-head
+  start-comment
 /
 
 char-bold: / STAR /
-char-emph: / STAR /
+char-emph: / SLASH /
 char-code: / GRAVE /
 
 char-phrase-start: /
