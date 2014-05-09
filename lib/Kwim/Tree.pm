@@ -106,20 +106,4 @@ sub parse {
     $parser->parse($text, $start);
 }
 
-#------------------------------------------------------------------------------
-sub render {
-    my ($self, $node) = @_;
-    my $out;
-    if (not ref $node) {
-        $out = $self->render_text($node);
-    }
-    elsif (ref($node) eq 'HASH') {
-        $out = $self->render_tag($node);
-    }
-    else {
-        $out .= $self->render($_) for @$node;
-    }
-    return $out;
-}
-
 1;

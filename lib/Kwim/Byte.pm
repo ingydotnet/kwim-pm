@@ -1,14 +1,9 @@
 use strict;
 package Kwim::Byte;
-use base 'Kwim::Tree';
+use base 'Kwim::Markup';
 use XXX -with => 'YAML::XS';
 
-sub final {
-    my ($self, $tree) = @_;
-    $self->render($tree);
-}
-
-sub render_tag {
+sub render_node {
     my ($self, $hash) = @_;
     my ($tag, $node) = each %$hash;
     if (not defined $node) {
