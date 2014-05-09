@@ -1,17 +1,39 @@
 #!/usr/bin/env perl
 
 use strict;
-use lib 'lib';
-use lib '../pegex-pm/lib';
+use FindBin;
+use lib "$FindBin::Bin/../lib";
+use lib "$FindBin::Bin/../../pegex-pm/lib";
 use Pegex::Parser;
 use Kwim::Grammar;
-use Kwim::HTML;
+use Getopt::Long;
 
+use Getopt::Long;
+
+my $to = "html";
+my $debug = 0;
+GetOptions (
+  "to=s" => \$to,
+  "debug" => \$debug,
+) or die "Error in command line arguments";
+
+my $ext_to_receiver = {
+  html => 'Kwim::HTML',
+  md => 'Kwim::Markdown',
+  markdown => 'Kwim::Markdown',
+  pod => 'Kwim::Pod',
+  byte => 'Kwim::Byte',
+};
+
+my $receiver_class = $ext_to_receiver->{$to}
+  or die "Unknown extension '$to'";
+eval "require $receiver_class; 1"
+  or die "$@";
 
 my $kwim = do {local $/; <>};
 my $parser = Pegex::Parser->new(
-    grammar => 'Kwim::Grammar'->new,
-    receiver => "Kwim::HTML"->new,
-    # debug => 1,
+  grammar => 'Kwim::Grammar'->new,
+  receiver => $receiver_class->new,
+  debug => $debug,
 );
 print $parser->parse($kwim);
