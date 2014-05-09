@@ -1,4 +1,4 @@
-=== Regular hyperlink
+=== Implicit hyperlink
 --- kwim
 Check out http://example.com for details.
 --- html
@@ -11,3 +11,35 @@ Check out http://example.com for details.
 -para
 --- markdown
 Check out <http://example.com> for details.
+
+=== Explicit hyperlink
+--- kwim
+Check out <http://example.com> for details.
+--- html
+<p>Check out <a href="http://example.com">http://example.com</a> for details.</p>
+--- byte
++para
+ Check out 
+=hyper http://example.com
+  for details.
+-para
+--- markdown
+Check out <http://example.com> for details.
+
+=== Named hyperlink
+--- kwim
+Check out "this"<http://example.com> for details.
+--- html
+<p>Check out <a href="http://example.com">this</a> for details.</p>
+--- byte
++para
+ Check out 
++hyper http://example.com
+ this
+-hyper
+  for details.
+-para
+--- markdown
+Check out [this](http://example.com) for details.
+
+

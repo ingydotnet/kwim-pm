@@ -130,8 +130,13 @@ phrase-hyper:
   | phrase-hyper-explicit
   | phrase-hyper-implicit
 
-phrase-hyper-named: 'XXX phrase-hyper-named'
-phrase-hyper-explicit: 'XXX phrase-hyper-explicit'
+phrase-hyper-named: /
+  DOUBLE ( [^ DOUBLE ]+ ) DOUBLE
+  LANGLE ( NS*? ) RANGLE
+/
+phrase-hyper-explicit: /
+  LANGLE ( NS*? ) RANGLE
+/
 phrase-hyper-implicit: /(https? COLON NS+)/
 
 char-next: / ( ALL ) /

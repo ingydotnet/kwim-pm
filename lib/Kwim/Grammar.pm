@@ -9,7 +9,7 @@ use constant start_rules => [
     'block-list-item',
 ];
 
-sub make_treeXXX {
+sub make_tree {
   {
     '+toprule' => 'document',
     'block_blank' => {
@@ -19,7 +19,7 @@ sub make_treeXXX {
       '.rgx' => qr/\G\#\#\#\r?\n((?:.*?\r?\n)*?)\#\#\#\r?\n(?:\ *\r?\n)?/
     },
     'block_head' => {
-      '.rgx' => qr/\G(={1,4})\ +(?:(.+?)\ +=+\r?\n|(.+\n(?:[^\s].*\r?\n)*[^\s].*?)\ +=+\r?\n|(.+\n(?:[^\s].*\r?\n)*)(?=[\ \*==]|\r?\n|\z))(?:\ *\r?\n)?/
+      '.rgx' => qr/\G(={1,4})\ +(?:(.+?)\ +=+\r?\n|(.+\r?\n(?:[^\s].*\r?\n)*[^\s].*?)\ +=+\r?\n|(.+\r?\n(?:[^\s].*\r?\n)*)(?=[\ \*=\#]|\r?\n|\z))(?:\ *\r?\n)?/
     },
     'block_list' => {
       '.rgx' => qr/\G(\*\ .*\r?\n(?:\*\ .*\r?\n|(?:\ *\r?\n)*\ \ .*\r?\n)*(?:\ *\r?\n)?)/
@@ -57,13 +57,13 @@ sub make_treeXXX {
       ]
     },
     'block_para' => {
-      '.rgx' => qr/\G((?:[^\ \*==\n].*\n)+)(?:\ *\r?\n)?/
+      '.rgx' => qr/\G((?:[^\ \*=\#\n].*?\r?\n)+)(?:\ *\r?\n)?/
     },
     'block_pref' => {
       '.rgx' => qr/\G((?:(?:\ *\r?\n)*\ \ .*\r?\n)+)(?:\ *\r?\n)?/
     },
     'block_title' => {
-      '.rgx' => qr/\G((?:[^\ \*==\n].*\n))={3,}\r?\n(?:\ *\r?\n)?/
+      '.rgx' => qr/\G((?:[^\ \*=\#\n].*?\r?\n))={3,}\r?\n(?:\ *\r?\n)?/
     },
     'block_top' => {
       '.any' => [
@@ -97,7 +97,7 @@ sub make_treeXXX {
       ]
     },
     'block_verse' => {
-      '.rgx' => qr/\G\.\n((?:[^\ \*==\n].*\n)+)(?:\ *\r?\n)?/
+      '.rgx' => qr/\G\.\r?\n((?:[^\ \*=\#\n].*?\r?\n)+)(?:\ *\r?\n)?/
     },
     'char_bold' => {
       '.rgx' => qr/\G\*/
@@ -107,6 +107,9 @@ sub make_treeXXX {
     },
     'char_escape' => {
       '.rgx' => qr/\G\\(.)/
+    },
+    'char_next' => {
+      '.rgx' => qr/\G([\s\S])/
     },
     'document' => {
       '+min' => 0,
@@ -162,13 +165,35 @@ sub make_treeXXX {
         }
       ]
     },
+    'phrase_hyper' => {
+      '.any' => [
+        {
+          '.ref' => 'phrase_hyper_named'
+        },
+        {
+          '.ref' => 'phrase_hyper_explicit'
+        },
+        {
+          '.ref' => 'phrase_hyper_implicit'
+        }
+      ]
+    },
+    'phrase_hyper_explicit' => {
+      '.rgx' => qr/\G<(\S*?)\>/
+    },
+    'phrase_hyper_implicit' => {
+      '.rgx' => qr/\G(https?:\S+)/
+    },
+    'phrase_hyper_named' => {
+      '.rgx' => qr/\G"([^"]+)"<(\S*?)\>/
+    },
     'phrase_markup' => {
       '.any' => [
         {
-          '.ref' => 'char_escape'
+          '.ref' => 'phrase_text'
         },
         {
-          '.ref' => 'phrase_text'
+          '.ref' => 'char_escape'
         },
         {
           '.ref' => 'phrase_bold'
@@ -178,11 +203,17 @@ sub make_treeXXX {
         },
         {
           '.ref' => 'phrase_code'
+        },
+        {
+          '.ref' => 'phrase_hyper'
+        },
+        {
+          '.ref' => 'char_next'
         }
       ]
     },
     'phrase_text' => {
-      '.rgx' => qr/\G([^\*\/`]+)/
+      '.rgx' => qr/\G((?:(?![\*\/`"<\\]|https?:)[\s\S])+)/
     },
     'text_markup' => {
       '+min' => 1,

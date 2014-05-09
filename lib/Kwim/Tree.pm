@@ -74,6 +74,17 @@ sub got_phrase_code {
     $self->add(code => $content);
 }
 
+sub got_phrase_hyper_named {
+    my ($self, $content) = @_;
+    my ($text, $link) = @$content;
+    { hyper => { link => $link, text => $text } };
+}
+
+sub got_phrase_hyper_explicit {
+    my ($self, $content) = @_;
+    { hyper => { link => $content, text => '' } };
+}
+
 sub got_phrase_hyper_implicit {
     my ($self, $content) = @_;
     { hyper => { link => $content, text => '' } };
