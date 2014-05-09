@@ -104,4 +104,11 @@ sub render_code {
     "<tt>$out</tt>";
 }
 
+sub render_hyper {
+    my ($self, $node) = @_;
+    my ($link, $text) = @{$node}{qw(link text)};
+    $link = $text if not length $link;
+    "<a href=\"$link\">$link</a>";
+}
+
 1;

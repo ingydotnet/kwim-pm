@@ -30,6 +30,10 @@ Paragraph 2
 <p>Paragraph 2</p>
 <br/>
 <br/>
+--- markdown
+Paragraph 1
+
+Paragraph 2
 
 # vim: set ft=txt:
 

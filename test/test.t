@@ -13,13 +13,13 @@ use TestML::Util;
 use Kwim::Grammar;
 use Kwim::Byte;
 use Kwim::HTML;
+use Kwim::Markdown;
 use XXX;
 
 sub parse {
     my ($self, $kwim, $emitter) = @_;
     # local $ENV{PERL_PEGEX_DEBUG} = 1;
     $kwim = $kwim->{value};
-    $kwim =~ s/^\\//gm;
     $emitter = $emitter->{value};
     my $parser = Pegex::Parser->new(
         grammar => 'Kwim::Grammar'->new,
@@ -41,9 +41,12 @@ Label = 'Kwim to ByteCode - $BlockLabel'
 *kwim.parse('Byte') == *byte
 Label = 'Kwim to HTML - $BlockLabel'
 *kwim.parse('HTML') == *html
+Label = 'Kwim to Markdown - $BlockLabel'
+*kwim.parse('Markdown') == *markdown
 
 %Include comment.tml
 %Include para.tml
 %Include list.tml
 %Include head.tml
 %Include phrase.tml
+%Include hyper.tml

@@ -11,6 +11,8 @@ I *like* pie.
 -para
 --- html
 <p>I <b>like</b> pie.</p>
+--- markdown
+I **like** pie.
 
 === Bold Code Phrase
 --- kwim
@@ -27,3 +29,5 @@ I like *`pi`*.
 -para
 --- html
 <p>I like <b><tt>pi</tt></b>.</p>
+--- markdown
+I like **`pi`**.

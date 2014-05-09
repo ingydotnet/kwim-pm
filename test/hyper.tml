@@ -1,0 +1,13 @@
+=== Regular hyperlink
+--- kwim
+Check out http://example.com for details.
+--- html
+<p>Check out <a href="http://example.com">http://example.com</a> for details.</p>
+--- byte
++para
+ Check out 
+=hyper http://example.com
+  for details.
+-para
+--- markdown
+Check out <http://example.com> for details.

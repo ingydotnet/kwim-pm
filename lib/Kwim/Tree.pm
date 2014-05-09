@@ -74,19 +74,29 @@ sub got_phrase_code {
     $self->add(code => $content);
 }
 
+sub got_phrase_hyper_implicit {
+    my ($self, $content) = @_;
+    { hyper => { link => $content, text => '' } };
+}
+
 #------------------------------------------------------------------------------
 sub add {
     my ($self, $tag, $content) = @_;
     if (ref $content) {
         $content = $content->[0];
-        $content = $content->[0] if @$content == 1;
+        if (@$content == 1) {
+            $content = $content->[0]
+        }
+        elsif (@$content > 1) {
+            $content = $self->collapse($content);
+        }
     }
     +{ $tag => $content }
 }
 
 sub add_parse {
     my ($self, $tag, $text, $start) = @_;
-    +{ $tag => $self->parse($text, $start) };
+    +{ $tag => $self->collapse($self->parse($text, $start)) };
 }
 
 sub parse {
@@ -95,15 +105,24 @@ sub parse {
         $start = 'text-markup';
         chomp $text;
     }
-    my @debug = ();
-    # @debug = (debug => 1);
-    # @debug = (debug => 1) if $start eq 'block-list-item';
+    my $debug = $self->{parser}{debug} || undef;
     my $parser = Pegex::Parser->new(
         grammar => 'Kwim::Grammar'->new(start => $start),
         receiver => 'Kwim::Tree'->new,
-        @debug,
+        debug => $debug,
     );
     $parser->parse($text, $start);
+}
+
+sub collapse {
+    my ($self, $content) = @_;
+    for (my $i = 0; $i < @$content; $i++) {
+        next if ref $content->[$i];
+        while ($i + 1 < @$content and not ref $content->[$i + 1]) {
+            $content->[$i] .= splice(@$content, $i + 1, 1);
+        }
+    }
+    $content;
 }
 
 1;

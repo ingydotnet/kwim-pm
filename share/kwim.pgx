@@ -32,8 +32,8 @@ line-comment: /
 block-head: /
   ( EQUAL{1,4} ) SPACE+ (:
     ( ANY+? ) SPACE+ EQUAL+ EOL
-  | ( ANY+ NL (: [^ WS ] ANY* EOL )* [^ WS ] ANY*? ) SPACE+ EQUAL+ EOL
-  | ( ANY+ NL (: [^ WS ] ANY* EOL )*) (= [ start-block ] | EOL | EOS)
+  | ( ANY+ EOL (: [^ WS ] ANY* EOL )* [^ WS ] ANY*? ) SPACE+ EQUAL+ EOL
+  | ( ANY+ EOL (: [^ WS ] ANY* EOL )*) (= [ char-block-start ] | EOL | EOS)
   ) line-blank?
 /
 
@@ -80,17 +80,10 @@ block-title: /
 /
 
 block-verse: /
-  DOT NL
+  DOT EOL
   ( text-line+ )
   line-blank?
 /
-
-# block-para:
-#   paragraph-flow
-# #   paragraph-hard
-
-# list-unordered: list-entry+
-# block-code: …
 
 block-para: /
   ( text-line+ )
@@ -100,18 +93,20 @@ block-para: /
 text-markup: phrase-markup+
 
 phrase-markup:
-  | char-escape
   | phrase-text
+  | char-escape
   | phrase-bold
   | phrase-emph
   | phrase-code
-#   | phrase-link
-#   | char-next
+  | phrase-hyper
+  | char-next
 
 char-escape: / BACK ( ANY ) /
 
 phrase-text: /
-  ( [^ char-phrase-start]+ )
+  (
+    (: (! [ char-phrase-start ] |https? COLON ) ALL)+
+  )
 /
 
 phrase-code: /
@@ -130,30 +125,44 @@ phrase-emph:
   ( !char-emph phrase-markup )+
   char-emph
 
-text-line: / (: [^ start-block NL ] ANY* NL ) /
+phrase-hyper:
+  | phrase-hyper-named
+  | phrase-hyper-explicit
+  | phrase-hyper-implicit
+
+phrase-hyper-named: 'XXX phrase-hyper-named'
+phrase-hyper-explicit: 'XXX phrase-hyper-explicit'
+phrase-hyper-implicit: /(https? COLON NS+)/
+
+char-next: / ( ALL ) /
+
+text-line: / (: [^ char-block-start NL ] ANY*? EOL ) /
 
 line-blank: / (: SPACE* EOL ) /
 
-start-pref: / SPACE /
-start-list: / STAR /
-start-head: / EQUAL /
-start-comment: / EQUAL /
-
-start-block: /
-  start-pref
-  start-list
-  start-head
-  start-comment
+char-block-start: /
+  char-pref
+  char-list
+  char-head
+  char-comment
 /
-
-char-bold: / STAR /
-char-emph: / SLASH /
-char-code: / GRAVE /
 
 char-phrase-start: /
   char-bold
   char-emph
   char-code
+  char-hyper
+  char-esc
 /
+
+char-pref: / SPACE /
+char-list: / STAR /
+char-head: / EQUAL /
+char-comment: / HASH /
+char-bold: / STAR /
+char-emph: / SLASH /
+char-code: / GRAVE /
+char-hyper: / DOUBLE LANGLE /
+char-esc: / BACK /
 
 # vim: set lisp sw=2:
