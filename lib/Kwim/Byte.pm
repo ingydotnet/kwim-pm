@@ -20,7 +20,6 @@ sub render_node {
 
 sub render_text {
     my ($self, $node) = @_;
-    chomp $node;
     $node =~ s/\n/\\n/g;
     " $node\n";
 }

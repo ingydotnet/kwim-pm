@@ -57,7 +57,6 @@ sub render_item {
 sub render_pref {
     my ($self, $node) = @_;
     my $out = $self->render($node);
-    chomp $out;
     "<pre>$out\n</pre>\n";
 }
 

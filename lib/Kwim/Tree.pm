@@ -29,6 +29,7 @@ sub got_block_head {
 
 sub got_block_pref {
     my ($self, $text) = @_;
+    chomp $text;
     $text =~ s/^  //gm;
     $self->add("pref" => $text);
 }
@@ -93,6 +94,17 @@ sub got_phrase_hyper_explicit {
 sub got_phrase_hyper_implicit {
     my ($self, $content) = @_;
     { hyper => { link => $content, text => '' } };
+}
+
+sub got_phrase_link_named {
+    my ($self, $content) = @_;
+    my ($text, $link) = @$content;
+    { link => { link => $link, text => $text } };
+}
+
+sub got_phrase_link_plain {
+    my ($self, $content) = @_;
+    { link => { link => $content, text => '' } };
 }
 
 #------------------------------------------------------------------------------

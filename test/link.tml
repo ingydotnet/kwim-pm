@@ -1,0 +1,5 @@
+=== Wiki style link
+--- kwim
+See [Kwim::HTML] for more info.
+--- pod
+See L<Kwim::HTML> for more info.

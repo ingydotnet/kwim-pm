@@ -12,7 +12,7 @@ Comment line 1
 Paragraph
 --- byte
 +comment
- \nComment line 1\n\n\n  Comment line 2\n
+ \nComment line 1\n\n\n  Comment line 2\n\n
 -comment
 +para
  Paragraph

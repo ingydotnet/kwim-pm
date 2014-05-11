@@ -57,7 +57,7 @@ sub render_item {
 sub render_pref {
     my ($self, $node) = @_;
     return '' if @{$self->{bullet}};
-    my $out = $node;
+    my $out = "$node\n";
     $out =~ s/^/    /gm;
     $out;
 }

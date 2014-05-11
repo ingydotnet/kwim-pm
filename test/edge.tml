@@ -1,0 +1,14 @@
+=== Bold at line start
+--- kwim
+I like pie
+*and* coffee.
+--- byte
++para
+ I like pie\n
++bold
+ and
+-bold
+  coffee.
+-para
+--- pod
+I like pie B<and> coffee.

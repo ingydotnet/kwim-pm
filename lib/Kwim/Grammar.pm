@@ -59,13 +59,13 @@ sub make_tree {
       ]
     },
     'block_para' => {
-      '.rgx' => qr/\G((?:[^\ \*=\#\n].*?\r?\n)+)(?:\ *\r?\n)?/
+      '.rgx' => qr/\G((?:(?![\ \*=\#\n]\ ).+\r?\n)+)(?:\ *\r?\n)?/
     },
     'block_pref' => {
       '.rgx' => qr/\G((?:(?:\ *\r?\n)*\ \ .*\r?\n)+)(?:\ *\r?\n)?/
     },
     'block_title' => {
-      '.rgx' => qr/\G((?:[^\ \*=\#\n].*?\r?\n))={3,}\r?\n(?:\ *\r?\n)?/
+      '.rgx' => qr/\G((?:(?![\ \*=\#\n]\ ).+\r?\n))={3,}\r?\n(?:\ *\r?\n)?/
     },
     'block_top' => {
       '.any' => [
@@ -99,7 +99,7 @@ sub make_tree {
       ]
     },
     'block_verse' => {
-      '.rgx' => qr/\G\.\r?\n((?:[^\ \*=\#\n].*?\r?\n)+)(?:\ *\r?\n)?/
+      '.rgx' => qr/\G\.\r?\n((?:(?![\ \*=\#\n]\ ).+\r?\n)+)(?:\ *\r?\n)?/
     },
     'char_bold' => {
       '.rgx' => qr/\G\*/
@@ -192,6 +192,22 @@ sub make_tree {
     'phrase_hyper_named' => {
       '.rgx' => qr/\G"([^"]+)"<(\S*?)\>/
     },
+    'phrase_link' => {
+      '.any' => [
+        {
+          '.ref' => 'phrase_link_named'
+        },
+        {
+          '.ref' => 'phrase_link_plain'
+        }
+      ]
+    },
+    'phrase_link_named' => {
+      '.rgx' => qr/\G"([^"]+)"\[(\S*?)\]/
+    },
+    'phrase_link_plain' => {
+      '.rgx' => qr/\G\[(\S*?)\]/
+    },
     'phrase_markup' => {
       '.any' => [
         {
@@ -213,12 +229,15 @@ sub make_tree {
           '.ref' => 'phrase_hyper'
         },
         {
+          '.ref' => 'phrase_link'
+        },
+        {
           '.ref' => 'char_next'
         }
       ]
     },
     'phrase_text' => {
-      '.rgx' => qr/\G((?:(?![\*\/`"<\\]|https?:)[\s\S])+)/
+      '.rgx' => qr/\G((?:(?![\*\/`"<"\[\\]|https?:)[\s\S])+)/
     },
     'text_markup' => {
       '+min' => 1,

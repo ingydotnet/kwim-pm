@@ -8,7 +8,6 @@ use constant top_block_separator => "\n";
 
 sub render_text {
     my ($self, $text) = @_;
-    chomp $text;
     $text =~ s/\n/ /g;
     return $text;
 }
@@ -50,7 +49,7 @@ sub render_pref {
     my ($self, $node) = @_;
     my $out = $node;
     chomp $out;
-    $out =~ s/^/    /g;
+    $out =~ s/^/    /gm;
     return "$out\n";
 }
 
@@ -73,6 +72,14 @@ sub render_code {
 }
 
 sub render_hyper {
+    my ($self, $node) = @_;
+    my ($link, $text) = @{$node}{qw(link text)};
+    (length $text == 0)
+    ? "L<$link>"
+    : "L<$text|$link>";
+}
+
+sub render_link {
     my ($self, $node) = @_;
     my ($link, $text) = @{$node}{qw(link text)};
     (length $text == 0)
