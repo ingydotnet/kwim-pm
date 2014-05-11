@@ -69,6 +69,11 @@ sub got_phrase_bold {
     $self->add(bold => $content);
 }
 
+sub got_phrase_emph {
+    my ($self, $content) = @_;
+    $self->add(emph => $content);
+}
+
 sub got_phrase_code {
     my ($self, $content) = @_;
     $self->add(code => $content);
