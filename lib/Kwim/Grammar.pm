@@ -1,7 +1,7 @@
 package Kwim::Grammar;
 use base 'Pegex::Grammar';
 
-use constant file => 'share/kwim.pgx';
+use constant file => '../kwim-pgx/kwim.pgx';
 
 use constant start_rules => [
     'document',
@@ -11,9 +11,11 @@ use constant start_rules => [
 
 sub make_tree {
   {
+    '+grammar' => 'kwim',
     '+toprule' => 'document',
+    '+version' => '0.0.1',
     'block_blank' => {
-      '.rgx' => qr/\G(?:\ *\r?\n)/
+      '.ref' => 'line_blank'
     },
     'block_comment' => {
       '.rgx' => qr/\G\#\#\#\r?\n((?:.*?\r?\n)*?)\#\#\#\r?\n(?:\ *\r?\n)?/
@@ -114,6 +116,9 @@ sub make_tree {
     'document' => {
       '+min' => 0,
       '.ref' => 'block_top'
+    },
+    'line_blank' => {
+      '.rgx' => qr/\G(?:\ *\r?\n)/
     },
     'line_comment' => {
       '.rgx' => qr/\G\#\ ?(.*?)\r?\n(?:\ *\r?\n)?/
