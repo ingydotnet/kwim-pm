@@ -11,6 +11,8 @@ Check out http://example.com for details.
 -para
 --- markdown
 Check out <http://example.com> for details.
+--- pod
+Check out L<http://example.com> for details.
 
 === Explicit hyperlink
 --- kwim
@@ -25,6 +27,8 @@ Check out <http://example.com> for details.
 -para
 --- markdown
 Check out <http://example.com> for details.
+--- pod
+Check out L<http://example.com> for details.
 
 === Named hyperlink
 --- kwim
@@ -41,5 +45,7 @@ Check out "this"<http://example.com> for details.
 -para
 --- markdown
 Check out [this](http://example.com) for details.
+--- pod
+Check out L<this|http://example.com> for details.
 
 

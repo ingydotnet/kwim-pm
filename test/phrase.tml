@@ -1,4 +1,4 @@
-=== Bold Phrase
+=== Strong/Bold Phrase
 --- kwim
 I *like* pie.
 --- byte
@@ -13,8 +13,10 @@ I *like* pie.
 <p>I <b>like</b> pie.</p>
 --- markdown
 I **like** pie.
+--- pod
+I B<like> pie.
 
-=== Bold Code Phrase
+=== Strong/Bold Code Phrase
 --- kwim
 I like *`pi`*.
 --- byte
@@ -31,3 +33,5 @@ I like *`pi`*.
 <p>I like <b><tt>pi</tt></b>.</p>
 --- markdown
 I like **`pi`**.
+--- pod
+I like B<C<pi>>.

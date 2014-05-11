@@ -1,5 +1,9 @@
-kwim -- Know What I Mean?!
-==========================
+kwim
+====
+
+Know What I Mean?!
+
+= Description
 
 Kwim is a plain text markup language that converts to many formats:
 
@@ -116,7 +120,7 @@ is an implicit syntax example followed by its explicit equivalent:
   A paragraph with some {bold: bold text} in it.
   :para
 
-### Two Space Indent
+=== Two Space Indent
 
 Kwim uses a 2 space indentation and it is very instrumental to its design. It
 allows for a very nice and natural embedding of blocks within blocks. Consider
@@ -134,12 +138,12 @@ this list:
 As you can see, 2 space indent is very natural here and allows for putting
 blocks inside blocks in a way that is not available in most markups.
 
-## Kwim Syntax
+== Kwim Syntax
 
-There are 4 sets of syntax to define: block//implicit, phrase//implicit,
-block//explicit and phrase//explicit. There are also escaping mechanisms.
+There are 4 sets of syntax to define: block / implicit, phrase / implicit,
+block / explicit and phrase / explicit. There are also escaping mechanisms.
 
-### Block // Implicit Syntaxes
+=== Block / Implicit Syntaxes
 
 A paragraph is a set of contiguous set of plain text lines. It is terminated
 by a blank line or by another block syntax at that level.

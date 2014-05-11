@@ -65,3 +65,27 @@ Paragraph 1
 * List item 4
 
 Paragraph 2
+--- pod
+Paragraph 1
+
+=over
+
+=item * List item 1
+
+=over
+
+=item * Sublist a
+
+=back
+
+=item * List item 2
+
+=item * List item 3
+
+=item * List item 4
+
+    preformatted
+
+=back
+
+Paragraph 2

@@ -23,28 +23,10 @@ My Title
 
 O HAI FREND
 
-=== Line Comment
---- kwim
-\# This is a comment line.
-\# Another. Eat next blank line.
+--- pod
+=head1 My Title
 
-Paragraph text.
---- byte
-+comment
- This is a comment line.
--comment
-+comment
- Another. Eat next blank line.
--comment
-+para
- Paragraph text.
--para
---- html
-<!-- This is a comment line. -->
-<!-- Another. Eat next blank line. -->
-<p>Paragraph text.</p>
---- markdown
-Paragraph text.
+O HAI FREND
 
 === Headers
 --- kwim
@@ -77,6 +59,14 @@ Paragraph text
 +pref
  preformatted text
 -pref
+--- html
+<h2>Level 2 Header</h2>
+<p>Paragraph text.</p>
+<h3>Level 3 Header Multi Line</h3>
+<p>Paragraph text</p>
+<h4>Level 4 Header</h4>
+<pre>preformatted text
+</pre>
 --- markdown
 \## Level 2 Header
 
@@ -89,12 +79,16 @@ Paragraph text
 \#### Level 4 Header
 
     preformatted text
+--- pod
+=head2 Level 2 Header
 
---- html
-<h2>Level 2 Header</h2>
-<p>Paragraph text.</p>
-<h3>Level 3 Header Multi Line</h3>
-<p>Paragraph text</p>
-<h4>Level 4 Header</h4>
-<pre>preformatted text
-</pre>
+Paragraph text.
+
+=head3 Level 3 Header Multi Line
+
+Paragraph text
+
+=head4 Level 4 Header
+
+    preformatted text
+

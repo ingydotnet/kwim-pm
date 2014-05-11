@@ -14,6 +14,7 @@ use Kwim::Grammar;
 use Kwim::Byte;
 use Kwim::HTML;
 use Kwim::Markdown;
+use Kwim::Pod;
 use XXX;
 
 sub parse {
@@ -43,6 +44,8 @@ Label = 'Kwim to HTML - $BlockLabel'
 *kwim.parse('HTML') == *html
 Label = 'Kwim to Markdown - $BlockLabel'
 *kwim.parse('Markdown') == *markdown
+Label = 'Kwim to Pod - $BlockLabel'
+*kwim.parse('Pod') == *pod
 
 %Include comment.tml
 %Include para.tml
