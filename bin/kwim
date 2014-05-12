@@ -11,7 +11,7 @@ use Getopt::Long;
 use Getopt::Long;
 
 my $to = "html";
-my $debug = 0;
+my $debug = $ENV{PERL_PEGEX_DEBUG} || 0;
 GetOptions (
   "to=s" => \$to,
   "debug" => \$debug,
