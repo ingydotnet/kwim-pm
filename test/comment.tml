@@ -27,6 +27,7 @@ Comment line 1
 
 
 -->
+
 <p>Paragraph</p>
 --- markdown
 Paragraph
@@ -61,7 +62,9 @@ Paragraph text.
 -para
 --- html
 <!-- This is a comment line. -->
+
 <!-- Another. Eat next blank line. -->
+
 <p>Paragraph text.</p>
 --- markdown
 Paragraph text.

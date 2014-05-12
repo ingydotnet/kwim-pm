@@ -45,9 +45,8 @@ FREND
  O HAI\nFREND
 -para
 --- html
-<h1 class="title">
-My Title
-</h1>
+<h1 class="title">My Title</h1>
+
 <p>O HAI FREND</p>
 --- markdown
 My Title
@@ -93,12 +92,17 @@ Paragraph text
 -pref
 --- html
 <h2>Level 2 Header</h2>
+
 <p>Paragraph text.</p>
+
 <h3>Level 3 Header Multi Line</h3>
+
 <p>Paragraph text</p>
+
 <h4>Level 4 Header</h4>
-<pre>preformatted text
-</pre>
+
+<pre><code>preformatted text
+</code></pre>
 --- markdown
 \## Level 2 Header
 

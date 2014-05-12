@@ -41,19 +41,23 @@ Paragraph 2
 -para
 --- html
 <p>Paragraph 1</p>
+
 <ul>
 <li>List item 1
 <ul>
 <li>Sublist a</li>
 </ul>
+
 </li>
 <li>List item 2</li>
 <li>List item 3</li>
 <li>List item 4
-<pre>preformatted
-</pre>
+<pre><code>preformatted
+</code></pre>
+
 </li>
 </ul>
+
 <p>Paragraph 2</p>
 --- markdown
 Paragraph 1

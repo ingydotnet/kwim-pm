@@ -36,8 +36,9 @@ sub render_blank { '' }
 sub render_title {
     my ($self, $node, $number) = @_;
     my ($name, $text) = ref $node ? @$node : (undef, $node);
+    my $label = $self->option->{'pod-upper-head'} ? 'NAME' : 'Name';
     if (defined $text) {
-        "=head1 Name\n\n$name - $text\n";
+        "=head1 $label\n\n$name - $text\n";
     }
     else {
         "=head1 $name\n";
@@ -47,6 +48,7 @@ sub render_title {
 sub render_head {
     my ($self, $node, $number) = @_;
     my $out = $self->render($node);
+    $out = uc($out) if $number eq '1' and $self->option->{'pod-upper-head'};
     "=head$number $out\n";
 }
 
@@ -106,4 +108,15 @@ sub render_item {
     $out;
 }
 
+sub render_complete {
+    my ($self, $out) = @_;
+    chomp $out;
+    <<"..."
+=encoding utf8
+
+$out
+
+=cut
+...
+}
 1;

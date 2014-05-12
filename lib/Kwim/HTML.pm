@@ -5,6 +5,9 @@ use XXX -with => 'YAML::XS';
 
 use HTML::Escape;
 
+use constant top_block_separator => "\n";
+
+my $document_title = '';
 my $info = {
     verse => {
         tag => 'p',
@@ -25,10 +28,7 @@ sub render_para {
     my ($self, $node) = @_;
     my $out = $self->render($node);
     chomp $out;
-    my $spacer = '';
-    if ($out =~ /\n/) {
-        $spacer = "\n";
-    }
+    my $spacer = $out =~ /\n/ ? "\n" : '';
     "<p>$spacer$out$spacer</p>\n";
 }
 
@@ -47,24 +47,30 @@ sub render_item {
     my ($self, $node) = @_;
     my $out = $self->render($node);
     $out =~ s/(.)(<(?:ul|pre|p)(?: |>))/$1\n$2/;
-    my $spacer = '';
-    if ($out =~ /\A</) {
-        $spacer = "\n";
-    }
-    "<li>$spacer$out$spacer</li>\n";
+    my $spacer = $out =~ /\n/ ? "\n" : '';
+    "<li>$out$spacer</li>\n";
 }
 
 sub render_pref {
     my ($self, $node) = @_;
-    my $out = $self->render($node);
-    "<pre>$out\n</pre>\n";
+    my $out = escape_html($node);
+    "<pre><code>$out\n</code></pre>\n";
 }
 
 sub render_title {
     my ($self, $node) = @_;
     my $out = $self->render($node);
     chomp $out;
-    "<h1 class=\"title\">\n$out\n</h1>\n";
+    my ($name, $text) = ref $node ? @$node : (undef, $node);
+    if (defined $text) {
+        $document_title = "$name - $text";
+        "<h1 class=\"title\">$name</h1>\n\n<p>$text</p>\n";
+    }
+    else {
+        $document_title = "$name";
+        my $spacer = $name =~ /\n/ ? "\n" : '';
+        "<h1 class=\"title\">$spacer$name$spacer</h1>\n";
+    }
 }
 
 sub render_head {
@@ -108,6 +114,35 @@ sub render_hyper {
     my ($link, $text) = @{$node}{qw(link text)};
     $text = $link if not length $text;
     "<a href=\"$link\">$text</a>";
+}
+
+sub render_link {
+    my ($self, $node) = @_;
+    my ($link, $text) = @{$node}{qw(link text)};
+    $text = $link if not length $text;
+    "<a href=\"$link\">$text</a>";
+}
+
+sub render_complete {
+    my ($self, $out) = @_;
+    chomp $out;
+    <<"..."
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>$document_title</title>
+  <link href="//kwim.org/assets/default.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="kwim content">
+
+$out
+
+</div>
+</body>
+</html>
+...
 }
 
 1;

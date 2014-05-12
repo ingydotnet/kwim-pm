@@ -92,4 +92,12 @@ sub render_hyper {
     : "[$text]($link)";
 }
 
+sub render_link {
+    my ($self, $node) = @_;
+    my ($link, $text) = @{$node}{qw(link text)};
+    (length $text == 0)
+    ? "[$link]($link)"
+    : "[$text]($link)";
+}
+
 1;

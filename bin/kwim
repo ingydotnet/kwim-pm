@@ -12,28 +12,50 @@ use Getopt::Long;
 
 my $to = "html";
 my $debug = $ENV{PERL_PEGEX_DEBUG} || 0;
-GetOptions (
+my %opts = (
+  'pod-upper-head' => 0,
+  'render-complete' => 0,
+);
+my %opt_spec = (
   "to=s" => \$to,
   "debug" => \$debug,
-) or die "Error in command line arguments";
-
-my $ext_to_receiver = {
-  html => 'Kwim::HTML',
-  md => 'Kwim::Markdown',
-  markdown => 'Kwim::Markdown',
-  pod => 'Kwim::Pod',
-  byte => 'Kwim::Byte',
-};
-
-my $receiver_class = $ext_to_receiver->{$to}
-  or die "Unknown extension '$to'";
-eval "require $receiver_class; 1"
-  or die "$@";
-
-my $kwim = do {local $/; <>};
-my $parser = Pegex::Parser->new(
-  grammar => 'Kwim::Grammar'->new,
-  receiver => $receiver_class->new,
-  debug => $debug,
+  "pod-upper-head=s" => \&opt,
+  "render-complete=s" => \&opt,
 );
-print $parser->parse($kwim);
+
+sub main {
+  GetOptions(%opt_spec) or die "Error in command line arguments";
+
+  my $ext_to_receiver = {
+    html => 'Kwim::HTML',
+    md => 'Kwim::Markdown',
+    markdown => 'Kwim::Markdown',
+    pod => 'Kwim::Pod',
+    byte => 'Kwim::Byte',
+  };
+
+  my $receiver_class = $ext_to_receiver->{$to}
+    or die "Unknown extension '$to'";
+  eval "require $receiver_class; 1"
+    or die "$@";
+
+  my $kwim = do {local $/; <>};
+  my $parser = Pegex::Parser->new(
+    grammar => 'Kwim::Grammar'->new,
+    receiver => $receiver_class->new(option => \%opts),
+    debug => $debug,
+  );
+  print $parser->parse($kwim);
+}
+
+sub opt {
+  my ($option, $value) = @_;
+  $opts{$option} =
+    $value =~ /^(true|1)$/ ? 1 :
+    $value =~ /^(false|0)$/ ? 0 :
+    0;
+}
+
+main();
+
+# vim: set sw=2:

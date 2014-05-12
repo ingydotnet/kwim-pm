@@ -1,15 +1,28 @@
 use strict;
 package Kwim::Markup;
+use Pegex::Base;
 use base 'Kwim::Tree';
 use XXX -with => 'YAML::XS';
 
+has option => {};
+
 use constant top_block_separator => '';
+
+sub BUILD {
+    $_[0]->{option} ||= {};
+}
 
 sub final {
     my ($self, $tree) = @_;
     $self->{stack} = [];
     $self->{bullet} = [];
-    $self->render($tree);
+    my $out = $self->render($tree);
+    if ($self->option->{'render-complete'}) {
+        if ($self->can('render_complete')) {
+            $out = $self->render_complete($out);
+        }
+    }
+    $out;
 }
 
 sub render {
