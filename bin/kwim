@@ -13,12 +13,14 @@ use Getopt::Long;
 my $to = "html";
 my $debug = $ENV{PERL_PEGEX_DEBUG} || 0;
 my %opts = (
+  'para-wrap' => 0,
   'pod-upper-head' => 0,
   'render-complete' => 0,
 );
 my %opt_spec = (
   "to=s" => \$to,
   "debug" => \$debug,
+  "para-wrap=s" => \&opt,
   "pod-upper-head=s" => \&opt,
   "render-complete=s" => \&opt,
 );
