@@ -35,8 +35,13 @@ sub render_blank { '' }
 
 sub render_title {
     my ($self, $node, $number) = @_;
-    my $out = $self->render($node);
-    "=head1 $out\n";
+    my ($name, $text) = ref $node ? @$node : (undef, $node);
+    if (defined $text) {
+        "=head1 Name\n\n$name - $text\n";
+    }
+    else {
+        "=head1 $name\n";
+    }
 }
 
 sub render_head {

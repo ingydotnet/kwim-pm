@@ -1,3 +1,35 @@
+=== Name / Abstract Title
+--- kwim
+New::Black
+\==========
+
+Is Still Black
+
+= Synopsis
+
+Back in black, hit the sack.
+--- byte
++title
+ New::Black
+-title
++para
+ Is Still Black
+-para
++head1
+ Synopsis
+-head1
++para
+ Back in black, hit the sack.
+-para
+--- pod
+=head1 Name
+
+New::Black - Is Still Black
+
+=head1 Synopsis
+
+Back in black, hit the sack.
+
 === Title and Paragraph
 --- kwim
 My Title

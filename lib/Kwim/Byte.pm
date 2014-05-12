@@ -24,6 +24,17 @@ sub render_text {
     " $node\n";
 }
 
+sub render_title {
+    my ($self, $node) = @_;
+    my ($name, $text) = ref $node ? @$node : (undef, $node);
+    if (defined $text) {
+        "+title\n $name\n-title\n+para\n $text\n-para\n";
+    }
+    else {
+        "+title\n $name\n-title\n";
+    }
+}
+
 sub render_hyper {
     my ($self, $node) = @_;
     my ($link, $text) = @{$node}{qw(link text)};

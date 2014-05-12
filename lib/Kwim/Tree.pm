@@ -51,8 +51,17 @@ sub got_block_list {
 }
 
 sub got_block_title {
-    my ($self, $text) = @_;
-    $self->add_parse(title => $text);
+    my ($self, $pair) = @_;
+    my ($name, $text) = @$pair;
+    if (defined $text) {
+        chomp $name;
+        chomp $text;
+        $text = $self->collapse($self->parse($text))->[0];
+        +{title => [ $name, $text ]};
+    }
+    else {
+        $self->add_parse(title => $name);
+    }
 }
 
 sub got_block_verse {
