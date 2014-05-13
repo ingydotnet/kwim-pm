@@ -24,7 +24,23 @@ sub make_tree {
       '.rgx' => qr/\G(={1,4})\ +(?:(.+?)\ +=+\r?\n|(.+\r?\n(?:[^\s].*\r?\n)*[^\s].*?)\ +=+\r?\n|(.+\r?\n(?:[^\s].*\r?\n)*)(?=[\ \*=\#]|\r?\n|\z))(?:\ *\r?\n)?/
     },
     'block_list' => {
+      '.any' => [
+        {
+          '.ref' => 'block_list_bullet'
+        },
+        {
+          '.ref' => 'block_list_number'
+        },
+        {
+          '.ref' => 'block_list_data'
+        }
+      ]
+    },
+    'block_list_bullet' => {
       '.rgx' => qr/\G(\*\ .*\r?\n(?:\*\ .*\r?\n|(?:\ *\r?\n)*\ \ .*\r?\n)*(?:\ *\r?\n)?)/
+    },
+    'block_list_data' => {
+      '.rgx' => qr/\G(\-\ .*\r?\n(?:\-\ .*\r?\n|(?:\ *\r?\n)*\ \ .*\r?\n)*(?:\ *\r?\n)?)/
     },
     'block_list_item' => {
       '+min' => 0,
@@ -57,6 +73,9 @@ sub make_tree {
           '.ref' => 'block_para'
         }
       ]
+    },
+    'block_list_number' => {
+      '.rgx' => qr/\G(\+\ .*\r?\n(?:\+\ .*\r?\n|(?:\ *\r?\n)*\ \ .*\r?\n)*(?:\ *\r?\n)?)/
     },
     'block_para' => {
       '.rgx' => qr/\G((?:(?![\ \*=\#\n]\ ).*\S.*\r?\n)+)(?:\ *\r?\n)?/

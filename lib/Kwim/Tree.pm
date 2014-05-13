@@ -34,7 +34,7 @@ sub got_block_pref {
     $self->add("pref" => $text);
 }
 
-sub got_block_list {
+sub got_block_list_bullet {
     my ($self, $text) = @_;
     my @items = map {s/^  //gm; $_} split /^\*\ /m, $text;
     shift @items;
@@ -43,6 +43,22 @@ sub got_block_list {
             my $item = $self->add_parse(item => $_, 'block-list-item');
             if ($item->{item}[0]{para}) {
                 $item->{item}[0] = $item->{item}[0]{para}[0];
+            }
+            $item;
+        } @items
+    ];
+    +{ list => $items };
+}
+
+sub got_block_list_data {
+    my ($self, $text) = @_;
+    my @items = map {s/^  //gm; $_} split /^\-\ /m, $text;
+    shift @items;
+    my $items = [
+        map {
+            my $item = $self->add_parse(data => $_, 'block-list-item');
+            if ($item->{data}[0]{para}) {
+                $item->{data}[0] = $item->{data}[0]{para}[0];
             }
             $item;
         } @items

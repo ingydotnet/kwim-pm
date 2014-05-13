@@ -114,6 +114,16 @@ sub render_item {
     $out;
 }
 
+sub render_data {
+    my ($self, $node) = @_;
+    my $item = shift @$node;
+    my $text = $self->render($item);
+    $text =~ s/\s*::\s*/\n\n/;
+    my $out = "=item " . $text . "\n\n";
+    $out .= $self->render($node) . "\n" if @$node;
+    $out;
+}
+
 sub render_complete {
     my ($self, $out) = @_;
     chomp $out;
