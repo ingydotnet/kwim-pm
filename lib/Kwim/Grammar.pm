@@ -203,13 +203,13 @@ sub make_tree {
       ]
     },
     'phrase_hyper_explicit' => {
-      '.rgx' => qr/\G<(\S*?)\>/
+      '.rgx' => qr/\G\[(https?:\S*?)\]/
     },
     'phrase_hyper_implicit' => {
       '.rgx' => qr/\G(https?:\S+)/
     },
     'phrase_hyper_named' => {
-      '.rgx' => qr/\G"([^"]+)"<(\S*?)\>/
+      '.rgx' => qr/\G"([^"]+)"\[(https?:\S*?)\]/
     },
     'phrase_link' => {
       '.any' => [
