@@ -30,7 +30,9 @@ sub render_para {
     my $out = $self->render($node);
     if ($self->option->{'para-wrap'}) {
         require Text::Autoformat;
-        $out = Text::Autoformat::autoformat($out, {right => 78});
+        if ($out !~ /^=for /) {
+            $out = Text::Autoformat::autoformat($out, {right => 78});
+        }
         chomp $out;
         return $out;
     }
@@ -72,10 +74,12 @@ sub render_func {
     my ($name, $args) = @$node, '';
     if ($name eq 'badge-travis' and $args =~ /^(\S+)\/(\S+)$/) {
         my $repo = $2;
-        qq{=for html\n<a href="https://travis-ci.org/$args"><img src="https://travis-ci.org/$args.png" alt="$repo"></a>}
+        qq{=for html\n<a href="https://travis-ci.org/$args"><img src="https://travis-ci.org/$args.png" alt="$repo"></a>\n\n}
     }
     else {
-        "<$args>";
+        my $text = $name;
+        $text .= $args if $args;
+        "<$text>";
     }
 }
 
