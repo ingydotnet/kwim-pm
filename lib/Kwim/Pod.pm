@@ -28,7 +28,7 @@ sub render_comment {
 sub render_para {
     my ($self, $node) = @_;
     my $out = $self->render($node);
-    if ($self->option->{'para-wrap'}) {
+    if ($self->option->{'wrap'}) {
         require Text::Autoformat;
         if ($out !~ /^=for /) {
             $out = Text::Autoformat::autoformat($out, {right => 78});
@@ -175,4 +175,5 @@ $out
 =cut
 ...
 }
+
 1;

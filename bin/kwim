@@ -13,16 +13,17 @@ use Getopt::Long;
 my $to = "html";
 my $debug = $ENV{PERL_PEGEX_DEBUG} || 0;
 my %opts = (
-  'para-wrap' => 0,
+  'wrap' => 0,
+  'complete' => 0,
   'pod-upper-head' => 0,
-  'render-complete' => 0,
 );
 my %opt_spec = (
   "to=s" => \$to,
   "debug" => \$debug,
-  "para-wrap=s" => \&opt,
+  "complete=s" => \&opt,
+  "wrap=s" => \&opt,
   "pod-upper-head=s" => \&opt,
-  "render-complete=s" => \&opt,
+  "pod-cpan" => \&pod_cpan_opts,
 );
 
 sub main {
@@ -56,6 +57,13 @@ sub opt {
     $value =~ /^(true|1)$/ ? 1 :
     $value =~ /^(false|0)$/ ? 0 :
     0;
+}
+
+sub pod_cpan_opts {
+  $to = 'pod';
+  $opts{complete} = 1;
+  $opts{wrap} = 1;
+  $opts{'pod-upper-head'} = 1;
 }
 
 main();

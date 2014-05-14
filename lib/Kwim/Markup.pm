@@ -17,7 +17,7 @@ sub final {
     $self->{stack} = [];
     $self->{bullet} = [];
     my $out = $self->render($tree);
-    if ($self->option->{'render-complete'}) {
+    if ($self->option->{'complete'}) {
         if ($self->can('render_complete')) {
             $out = $self->render_complete($out);
         }
