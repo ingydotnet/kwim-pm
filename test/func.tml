@@ -2,4 +2,5 @@
 --- kwim
 <badge-travis ingydotnet/kwim-pm>
 --- pod
+=for html
 <a href="https://travis-ci.org/ingydotnet/kwim-pm"><img src="https://travis-ci.org/ingydotnet/kwim-pm.png" alt="kwim-pm"></a>

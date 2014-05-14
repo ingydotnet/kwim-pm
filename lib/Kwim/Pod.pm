@@ -72,7 +72,7 @@ sub render_func {
     my ($name, $args) = @$node, '';
     if ($name eq 'badge-travis' and $args =~ /^(\S+)\/(\S+)$/) {
         my $repo = $2;
-        qq{<a href="https://travis-ci.org/$args"><img src="https://travis-ci.org/$args.png" alt="$repo"></a>}
+        qq{=for html\n<a href="https://travis-ci.org/$args"><img src="https://travis-ci.org/$args.png" alt="$repo"></a>}
     }
     else {
         "<$args>";
