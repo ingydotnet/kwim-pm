@@ -42,7 +42,7 @@ sub got_block_list_bullet {
         map {
             my $item = $self->add_parse(item => $_, 'block-list-item');
             if ($item->{item}[0]{para}) {
-                $item->{item}[0] = $item->{item}[0]{para}[0];
+                $item->{item}[0] = $item->{item}[0]{para};
             }
             $item;
         } @items

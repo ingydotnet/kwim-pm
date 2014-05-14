@@ -63,41 +63,51 @@ sub render_pref {
     my $out = $node;
     chomp $out;
     $out =~ s/^/    /gm;
-    return "$out\n";
+    "$out\n";
 }
 
 sub render_bold {
     my ($self, $node) = @_;
     my $out = $self->render($node);
-    return "B<$out>";
+    $self->render_phrase(B => $out);
 }
 
 sub render_emph {
     my ($self, $node) = @_;
     my $out = $self->render($node);
-    return "I<$out>";
+    $self->render_phrase(I => $out);
 }
 
 sub render_code {
     my ($self, $node) = @_;
     my $out = $self->render($node);
-    return "C<$out>";
+    $self->render_phrase(C => $out);
 }
 
 sub render_hyper {
     my ($self, $node) = @_;
     my ($link, $text) = @{$node}{qw(link text)};
     (length $text == 0)
-    ? "L<$link>"
-    : "L<$text|$link>";
+    ? $self->render_phrase(L => $link)
+    : $self->render_phrase(L => "$text|$link");
 }
 
 sub render_link {
     my ($self, $node) = @_;
     my ($link, $text) = @{$node}{qw(link text)};
     (length $text == 0)
-    ? "L<$link>"
-    : "L<$text|$link>";
+    ? $self->render_phrase(L => $link)
+    : $self->render_phrase(L => "$text|$link");
+}
+
+sub render_phrase {
+    my ($self, $code, $text) = @_;
+    ($text !~ /[<>]/) ? "$code<$text>" :
+    ($text !~ /(<< | >>)/) ? "$code<< $text >>" :
+    ($text !~ /(<<< | >>>)/) ? "$code<<< $text >>>" :
+    ($text !~ /(<<<< | >>>>)/) ? "$code<<<< $text >>>>" :
+    ($text !~ /(<<<<< | >>>>>)/) ? "$code<<<<< $text >>>>>" :
+    $text;
 }
 
 sub render_list {

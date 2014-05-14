@@ -54,5 +54,5 @@ I like */`pi`/*.
 --- markdown
 I like **_`pi`_**.
 --- pod
-I like B<I<C<pi>>>.
+I like B<<< I<< C<pi> >> >>>.
 

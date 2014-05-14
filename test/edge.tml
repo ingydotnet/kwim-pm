@@ -12,3 +12,9 @@ I like pie
 -para
 --- pod
 I like pie B<and> coffee.
+
+=== Angles in pod
+--- kwim
+Well, `2 < 3`
+--- pod
+Well, C<< 2 < 3 >>

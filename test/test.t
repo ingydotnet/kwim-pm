@@ -50,9 +50,10 @@ Label = 'Kwim to Pod - $BlockLabel'
 %Include comment.tml
 %Include para.tml
 %Include list.tml
+%Include list-data.tml
 %Include head.tml
 %Include phrase.tml
 %Include hyper.tml
 %Include link.tml
 %Include edge.tml
-%Include list-data.tml
+%Include bugs.tml
