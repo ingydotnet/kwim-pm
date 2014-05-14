@@ -1,27 +1,44 @@
 === Data List
 --- kwim
-- apple :: an apple is a tasty fruit
-- banana ::
-  a banana is a trrbl fruit
-- carrot :: a carrot is orange
+- term one :: Definition 1 is /just/ a line
+- `term 2` :: Definition 2
+  Followed by a paragraph
 
-  this is not a fruit
+- Term
+  No definition,
+  just a paragraph
+- Final
+  * No definition
+  * Just
+  * a list
 
 --- pod
 =over
 
-=item apple
+=item term one
 
-an apple is a tasty fruit
+Definition 1 is I<just> a line
 
-=item banana
+=item C<term 2>
 
-a banana is a trrbl fruit
+Definition 2
 
-=item carrot
+Followed by a paragraph
 
-a carrot is orange
+=item Term
 
-this is not a fruit
+No definition, just a paragraph
+
+=item Final
+
+=over
+
+=item * No definition
+
+=item * Just
+
+=item * a list
+
+=back
 
 =back

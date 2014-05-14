@@ -116,12 +116,19 @@ sub render_item {
 
 sub render_data {
     my ($self, $node) = @_;
-    my $item = shift @$node;
-    my $text = $self->render($item);
-    $text =~ s/\s*::\s*/\n\n/;
-    my $out = "=item " . $text . "\n\n";
-    $out .= $self->render($node) . "\n" if @$node;
-    $out;
+    my $out = "=over\n\n";
+    for my $item (@$node) {
+        my ($term, $def, $rest) = @$item;
+        $term = $self->render($term);
+        $out .= "=item $term\n\n";
+        if (length $def) {
+            $out .= $self->render($def) . "\n\n";
+        }
+        if ($rest) {
+            $out .= $self->render($rest) . "\n";
+        }
+    }
+    $out . "=back\n";
 }
 
 sub render_complete {

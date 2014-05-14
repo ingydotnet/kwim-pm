@@ -56,14 +56,24 @@ sub got_block_list_data {
     shift @items;
     my $items = [
         map {
-            my $item = $self->add_parse(data => $_, 'block-list-item');
-            if ($item->{data}[0]{para}) {
-                $item->{data}[0] = $item->{data}[0]{para}[0];
+            my ($term, $def, $rest);
+            if (s/(.*?)\s*::\s*(\S.*)\n//) {
+                ($term, $def, $rest) = ($1, $2, $_);
+                $def = $self->collapse($self->parse($def));
             }
-            $item;
+            else {
+                s/(.*)\n//;
+                ($term, $def, $rest) = ($1, '', $_);
+            }
+            $term = $self->collapse($self->parse($term));
+            my $result = [$term, $def];
+            if (length $rest) {
+                push @$result, $self->parse($rest, 'block-list-item');
+            }
+            $result;
         } @items
     ];
-    +{ list => $items };
+    +{ data => $items };
 }
 
 sub got_block_title {
