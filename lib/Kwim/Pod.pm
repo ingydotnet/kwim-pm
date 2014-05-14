@@ -66,6 +66,19 @@ sub render_pref {
     "$out\n";
 }
 
+# Just a hack for badge-travis
+sub render_func {
+    my ($self, $node) = @_;
+    my ($name, $args) = @$node, '';
+    if ($name eq 'badge-travis' and $args =~ /^(\S+)\/(\S+)$/) {
+        my $repo = $2;
+        qq{<a href="https://travis-ci.org/$args"><img src="https://travis-ci.org/$args.png" alt="$repo"></a>}
+    }
+    else {
+        "<$args>";
+    }
+}
+
 sub render_bold {
     my ($self, $node) = @_;
     my $out = $self->render($node);

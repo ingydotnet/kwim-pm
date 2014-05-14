@@ -189,6 +189,9 @@ sub make_tree {
         }
       ]
     },
+    'phrase_func' => {
+      '.rgx' => qr/\G<([^\>]+)\>/
+    },
     'phrase_hyper' => {
       '.any' => [
         {
@@ -236,6 +239,9 @@ sub make_tree {
           '.ref' => 'char_escape'
         },
         {
+          '.ref' => 'phrase_func'
+        },
+        {
           '.ref' => 'phrase_bold'
         },
         {
@@ -256,7 +262,7 @@ sub make_tree {
       ]
     },
     'phrase_text' => {
-      '.rgx' => qr/\G((?:(?![\*\/`"<"\[\\]|https?:)[\s\S])+)/
+      '.rgx' => qr/\G((?:(?![<\*\/`"\[\\]|https?:)[\s\S])+)/
     },
     'text_markup' => {
       '+min' => 1,

@@ -1,0 +1,5 @@
+=== Travis badge for pod
+--- kwim
+<badge-travis ingydotnet/kwim-pm>
+--- pod
+<a href="https://travis-ci.org/ingydotnet/kwim-pm"><img src="https://travis-ci.org/ingydotnet/kwim-pm.png" alt="kwim-pm"></a>

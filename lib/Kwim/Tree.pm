@@ -100,6 +100,11 @@ sub got_block_para {
     $self->add_parse(para => $text);
 }
 
+sub got_phrase_func {
+    my ($self, $content) = @_;
+    +{func => [split ' ', $content, 2]};
+}
+
 sub got_phrase_bold {
     my ($self, $content) = @_;
     $self->add(bold => $content);
