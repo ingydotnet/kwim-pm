@@ -1,0 +1,27 @@
+=== Data List
+--- kwim
+- apple :: an apple is a tasty fruit
+- banana ::
+  a banana is a trrbl fruit
+- carrot :: a carrot is orange
+
+  this is not a fruit
+
+--- pod
+=over
+
+=item apple
+
+an apple is a tasty fruit
+
+=item banana
+
+a banana is a trrbl fruit
+
+=item carrot
+
+a carrot is orange
+
+this is not a fruit
+
+=back
