@@ -123,6 +123,9 @@ sub make_tree {
     'char_bold' => {
       '.rgx' => qr/\G\*/
     },
+    'char_del' => {
+      '.rgx' => qr/\G\-/
+    },
     'char_emph' => {
       '.rgx' => qr/\G\//
     },
@@ -148,6 +151,9 @@ sub make_tree {
           '.ref' => 'char_bold'
         },
         {
+          '.rgx' => qr/\G(?=\S)/
+        },
+        {
           '+min' => 1,
           '.all' => [
             {
@@ -167,8 +173,36 @@ sub make_tree {
     'phrase_code' => {
       '.rgx' => qr/\G`([^`]*?)`/
     },
+    'phrase_del' => {
+      '.all' => [
+        {
+          '.rgx' => qr/\G(?=\S)/
+        },
+        {
+          '.ref' => 'char_del'
+        },
+        {
+          '+min' => 1,
+          '.all' => [
+            {
+              '+asr' => -1,
+              '.ref' => 'char_del'
+            },
+            {
+              '.ref' => 'phrase_markup'
+            }
+          ]
+        },
+        {
+          '.ref' => 'char_del'
+        }
+      ]
+    },
     'phrase_emph' => {
       '.all' => [
+        {
+          '.rgx' => qr/\G(?=\S)/
+        },
         {
           '.ref' => 'char_emph'
         },
@@ -242,13 +276,16 @@ sub make_tree {
           '.ref' => 'phrase_func'
         },
         {
+          '.ref' => 'phrase_code'
+        },
+        {
           '.ref' => 'phrase_bold'
         },
         {
           '.ref' => 'phrase_emph'
         },
         {
-          '.ref' => 'phrase_code'
+          '.ref' => 'phrase_del'
         },
         {
           '.ref' => 'phrase_hyper'
@@ -262,7 +299,7 @@ sub make_tree {
       ]
     },
     'phrase_text' => {
-      '.rgx' => qr/\G((?:(?![<\*\/`"\[\\]|https?:)[\s\S])+)/
+      '.rgx' => qr/\G((?:(?![<`\*\/\-"\[\\]|https?:)[\s\S])+)/
     },
     'text_markup' => {
       '+min' => 1,

@@ -91,6 +91,12 @@ sub render_comment {
     }
 }
 
+sub render_code {
+    my ($self, $node) = @_;
+    my $out = $self->render($node);
+    "<code>$out</code>";
+}
+
 sub render_bold {
     my ($self, $node) = @_;
     my $out = $self->render($node);
@@ -103,10 +109,10 @@ sub render_emph {
     "<em>$out</em>";
 }
 
-sub render_code {
+sub render_del {
     my ($self, $node) = @_;
     my $out = $self->render($node);
-    "<code>$out</code>";
+    "<del>$out</del>";
 }
 
 sub render_hyper {

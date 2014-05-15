@@ -105,6 +105,11 @@ sub got_phrase_func {
     +{func => [split ' ', $content, 2]};
 }
 
+sub got_phrase_code {
+    my ($self, $content) = @_;
+    $self->add(code => $content);
+}
+
 sub got_phrase_bold {
     my ($self, $content) = @_;
     $self->add(bold => $content);
@@ -115,9 +120,9 @@ sub got_phrase_emph {
     $self->add(emph => $content);
 }
 
-sub got_phrase_code {
+sub got_phrase_del {
     my ($self, $content) = @_;
-    $self->add(code => $content);
+    $self->add(del => $content);
 }
 
 sub got_phrase_hyper_named {
