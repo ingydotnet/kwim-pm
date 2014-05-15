@@ -148,10 +148,7 @@ sub make_tree {
     'phrase_bold' => {
       '.all' => [
         {
-          '.ref' => 'char_bold'
-        },
-        {
-          '.rgx' => qr/\G(?=\S)/
+          '.rgx' => qr/\G\*(?=\S[^\*])/
         },
         {
           '+min' => 1,
@@ -176,10 +173,7 @@ sub make_tree {
     'phrase_del' => {
       '.all' => [
         {
-          '.rgx' => qr/\G(?=\S)/
-        },
-        {
-          '.ref' => 'char_del'
+          '.rgx' => qr/\G\-(?=\S[^\-])/
         },
         {
           '+min' => 1,
@@ -201,10 +195,7 @@ sub make_tree {
     'phrase_emph' => {
       '.all' => [
         {
-          '.rgx' => qr/\G(?=\S)/
-        },
-        {
-          '.ref' => 'char_emph'
+          '.rgx' => qr/\G\/(?=\S[^\/])/
         },
         {
           '+min' => 1,
