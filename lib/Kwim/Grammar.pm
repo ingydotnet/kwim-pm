@@ -173,7 +173,7 @@ sub make_tree {
     'phrase_del' => {
       '.all' => [
         {
-          '.rgx' => qr/\G\-\-(?=\S[^\-\-])/
+          '.rgx' => qr/\G\-\-(?=\S)(?!\-\-)/
         },
         {
           '+min' => 1,

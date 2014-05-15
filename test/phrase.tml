@@ -111,3 +111,9 @@ I tried left-, right- and middle-clicking.
 -para
 --- html
 <p>I tried left-, right- and middle-clicking.</p>
+
+=== Single char delete
+--- kwim
+--x--
+--- html
+<p><del>x</del></p>
