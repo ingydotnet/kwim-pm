@@ -35,7 +35,7 @@ __DATA__
 
 %TestML 0.1.0
 
-# Diff = 1
+Diff = 1
 # Plan = 4
 
 Label = 'Kwim to ByteCode - $BlockLabel'

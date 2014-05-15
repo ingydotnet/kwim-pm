@@ -120,21 +120,6 @@ sub make_tree {
     'block_verse' => {
       '.rgx' => qr/\G\.\r?\n((?:(?![\ \*=\#\n]\ ).*\S.*\r?\n)+)(?:\ *\r?\n)?/
     },
-    'char_bold' => {
-      '.rgx' => qr/\G\*/
-    },
-    'char_del' => {
-      '.rgx' => qr/\G\-/
-    },
-    'char_emph' => {
-      '.rgx' => qr/\G\//
-    },
-    'char_escape' => {
-      '.rgx' => qr/\G\\(.)/
-    },
-    'char_next' => {
-      '.rgx' => qr/\G([\s\S])/
-    },
     'document' => {
       '+min' => 0,
       '.ref' => 'block_top'
@@ -144,6 +129,21 @@ sub make_tree {
     },
     'line_comment' => {
       '.rgx' => qr/\G\#\ ?(.*?)\r?\n(?:\ *\r?\n)?/
+    },
+    'marker_bold' => {
+      '.rgx' => qr/\G\*/
+    },
+    'marker_del' => {
+      '.rgx' => qr/\G\-\-/
+    },
+    'marker_emph' => {
+      '.rgx' => qr/\G\//
+    },
+    'marker_escape' => {
+      '.rgx' => qr/\G\\(.)/
+    },
+    'marker_next' => {
+      '.rgx' => qr/\G([\s\S])/
     },
     'phrase_bold' => {
       '.all' => [
@@ -155,7 +155,7 @@ sub make_tree {
           '.all' => [
             {
               '+asr' => -1,
-              '.ref' => 'char_bold'
+              '.ref' => 'marker_bold'
             },
             {
               '.ref' => 'phrase_markup'
@@ -163,7 +163,7 @@ sub make_tree {
           ]
         },
         {
-          '.ref' => 'char_bold'
+          '.ref' => 'marker_bold'
         }
       ]
     },
@@ -173,14 +173,14 @@ sub make_tree {
     'phrase_del' => {
       '.all' => [
         {
-          '.rgx' => qr/\G\-(?=\S[^\-])/
+          '.rgx' => qr/\G\-\-(?=\S[^\-\-])/
         },
         {
           '+min' => 1,
           '.all' => [
             {
               '+asr' => -1,
-              '.ref' => 'char_del'
+              '.ref' => 'marker_del'
             },
             {
               '.ref' => 'phrase_markup'
@@ -188,7 +188,7 @@ sub make_tree {
           ]
         },
         {
-          '.ref' => 'char_del'
+          '.ref' => 'marker_del'
         }
       ]
     },
@@ -202,7 +202,7 @@ sub make_tree {
           '.all' => [
             {
               '+asr' => -1,
-              '.ref' => 'char_emph'
+              '.ref' => 'marker_emph'
             },
             {
               '.ref' => 'phrase_markup'
@@ -210,7 +210,7 @@ sub make_tree {
           ]
         },
         {
-          '.ref' => 'char_emph'
+          '.ref' => 'marker_emph'
         }
       ]
     },
@@ -261,7 +261,7 @@ sub make_tree {
           '.ref' => 'phrase_text'
         },
         {
-          '.ref' => 'char_escape'
+          '.ref' => 'marker_escape'
         },
         {
           '.ref' => 'phrase_func'
@@ -285,12 +285,12 @@ sub make_tree {
           '.ref' => 'phrase_link'
         },
         {
-          '.ref' => 'char_next'
+          '.ref' => 'marker_next'
         }
       ]
     },
     'phrase_text' => {
-      '.rgx' => qr/\G((?:(?![<`\*\/\-"\[\\]|https?:)[\s\S])+)/
+      '.rgx' => qr/\G((?:(?![<`\*\/\-\-"\[\\]|https?:)[\s\S])+)/
     },
     'text_markup' => {
       '+min' => 1,

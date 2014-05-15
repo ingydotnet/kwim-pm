@@ -36,7 +36,7 @@ I I<like> pie.
 
 === Delete Phrase
 --- kwim
-I -don't- like pie.
+I --don't-- like pie.
 --- byte
 +para
  I 
@@ -74,3 +74,40 @@ I like **_`pi`_**.
 --- pod
 I like B<<< I<< C<pi> >> >>>.
 
+=== Delete Markup
+--- kwim
+Do --not-- touch.
+--- byte
++para
+ Do 
++del
+ not
+-del
+  touch.
+-para
+--- html
+<p>Do <del>not</del> touch.</p>
+
+=== Delete Markup-hyphenated
+--- kwim
+Her --well-known-- infamous father-in-law.
+--- byte
++para
+ Her 
++del
+ well-known
+-del
+  infamous father-in-law.
+-para
+--- html
+<p>Her <del>well-known</del> infamous father-in-law.</p>
+
+=== Delete Markup - prefixes
+--- kwim
+I tried left-, right- and middle-clicking.
+--- byte
++para
+ I tried left-, right- and middle-clicking.
+-para
+--- html
+<p>I tried left-, right- and middle-clicking.</p>
