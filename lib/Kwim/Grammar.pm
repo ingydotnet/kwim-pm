@@ -142,6 +142,12 @@ sub make_tree {
     'marker_escape' => {
       '.rgx' => qr/\G\\(.)/
     },
+    'marker_func_end' => {
+      '.rgx' => qr/\G\>/
+    },
+    'marker_func_start' => {
+      '.rgx' => qr/\G</
+    },
     'marker_next' => {
       '.rgx' => qr/\G([\s\S])/
     },
@@ -215,7 +221,26 @@ sub make_tree {
       ]
     },
     'phrase_func' => {
-      '.rgx' => qr/\G<([^\>]+)\>/
+      '.all' => [
+        {
+          '.ref' => 'marker_func_start'
+        },
+        {
+          '+min' => 1,
+          '-flat' => 1,
+          '.any' => [
+            {
+              '.rgx' => qr/\G([^\>]+)/
+            },
+            {
+              '.ref' => 'phrase_func'
+            }
+          ]
+        },
+        {
+          '.ref' => 'marker_func_end'
+        }
+      ]
     },
     'phrase_hyper' => {
       '.any' => [

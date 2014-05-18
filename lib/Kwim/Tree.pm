@@ -102,7 +102,7 @@ sub got_block_para {
 
 sub got_phrase_func {
     my ($self, $content) = @_;
-    +{func => [split ' ', $content, 2]};
+    +{func => join '', @$content};
 }
 
 sub got_phrase_code {

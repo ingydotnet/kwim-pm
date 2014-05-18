@@ -68,19 +68,18 @@ sub render_pref {
     "$out\n";
 }
 
-# Just a hack for badge-travis
 sub render_func {
     my ($self, $node) = @_;
-    my ($name, $args) = @$node, '';
-    if ($name eq 'badge-travis' and $args =~ /^(\S+)\/(\S+)$/) {
-        my $repo = $2;
-        qq{=for html\n<a href="https://travis-ci.org/$args"><img src="https://travis-ci.org/$args.png" alt="$repo"></a>\n\n}
+    if ($node =~ /^([\-\w]+)(?:[\ \:]|\z)((?s:.*)?)$/) {
+        my ($name, $args) = ($1, $2);
+        $name =~ s/-/_/g;
+        my $method = "phrase_func_$name";
+        if ($self->can($method)) {
+            my $out = $self->$method($args);
+            return $out if defined $out;
+        }
     }
-    else {
-        my $text = $name;
-        $text .= $args if $args;
-        "<$text>";
-    }
+    "<$node>";
 }
 
 sub render_bold {
@@ -174,6 +173,13 @@ $out
 
 =cut
 ...
+}
+
+sub phrase_func_badge_travis {
+    my ($self, $args) = @_;
+    return unless $args =~ /^(\S+)\/(\S+)$/;
+    my $repo = $2;
+    qq{=for html\n<a href="https://travis-ci.org/$args"><img src="https://travis-ci.org/$args.png" alt="$repo"></a>\n\n}
 }
 
 1;
