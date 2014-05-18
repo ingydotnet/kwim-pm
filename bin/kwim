@@ -29,26 +29,79 @@ my %opt_spec = (
 sub main {
   GetOptions(%opt_spec) or die "Error in command line arguments";
 
-  my $ext_to_receiver = {
+  my $format_mapping = {
     html => 'Kwim::HTML',
     md => 'Kwim::Markdown',
     markdown => 'Kwim::Markdown',
     pod => 'Kwim::Pod',
     byte => 'Kwim::Byte',
+
+    man => \&to_man,
+    pdf => \&to_pdf,
+    dvi => \&to_dvi,
   };
 
-  my $receiver_class = $ext_to_receiver->{$to}
-    or die "Unknown extension '$to'";
+  my $format = $format_mapping->{$to}
+    or die "Unknown output format '$to'";
+  my $kwim = do {local $/; <>};
+  if (ref $format) {
+    $format->($kwim);
+    return;
+  }
+  my $receiver_class = $format;
   eval "require $receiver_class; 1"
     or die "$@";
 
-  my $kwim = do {local $/; <>};
   my $parser = Pegex::Parser->new(
     grammar => 'Kwim::Grammar'->new,
     receiver => $receiver_class->new(option => \%opts),
     debug => $debug,
   );
   print $parser->parse($kwim);
+}
+
+sub to_man {
+  my ($kwim) = @_;
+  print get_man($kwim);
+}
+
+sub to_pdf {
+  my ($kwim) = @_;
+  my ($in, $out, $err) = get_man($kwim);
+  my @cmd = ('groffer', '--pdf');
+  IPC::Run::run(\@cmd, \$in, \$out, \$err, IPC::Run::timeout(10))
+    or die "$cmd[0]: $?";
+  die "$err" if $err;
+  print $out;
+}
+
+sub to_dvi {
+  my ($kwim) = @_;
+  my ($in, $out, $err) = get_man($kwim);
+  my @cmd = ('groffer', '--dvi');
+  IPC::Run::run(\@cmd, \$in, \$out, \$err, IPC::Run::timeout(10))
+    or die "$cmd[0]: $?";
+  die "$err" if $err;
+  print $out;
+}
+
+sub get_man {
+  require IPC::Run;
+  my ($in) = @_;
+  my ($out, $err);
+
+  my @cmd = ($0, '--to=pod');
+  IPC::Run::run(\@cmd, \$in, \$out, \$err, IPC::Run::timeout(10))
+    or die "$0: $?";
+  die "$err" if $err;
+
+  $in = $out;
+  @cmd = ('pod2man');
+  IPC::Run::run(\@cmd, \$in, \$out, \$err, IPC::Run::timeout(10))
+    or die "$0: $?";
+  die "$err" if $err;
+
+  $out;
 }
 
 sub opt {
