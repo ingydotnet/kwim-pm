@@ -59,7 +59,7 @@ sub render_pref {
 
 sub render_func {
     my ($self, $node) = @_;
-    if ($node =~ /^([\-\w]+)((?:[\ \:]|\z)(?s:.*)?)$/) {
+    if ($node =~ /^(\w[\-\w]*) ?((?s:.*)?)$/) {
         my ($name, $args) = ($1, $2);
         $name =~ s/-/_/g;
         my $method = "phrase_func_$name";
@@ -165,7 +165,7 @@ $out
 ...
 }
 
-
+#------------------------------------------------------------------------------
 sub format_phrase_func_html {
     my ($self, $tag, $class, $attrib, $content) = @_;
     my $attribs = '';
@@ -173,9 +173,13 @@ sub format_phrase_func_html {
         $attribs = ' class="' . join(' ', @$class) . '"';
     }
     if (@$attrib) {
-        $attribs = ' ' . join(' ', @$attrib);
+        $attribs = ' ' . join(' ', map {
+            /=".*"$/ ? $_ : do { s/=(.*)/="$1"/; $_ }
+        } @$attrib);
     }
-    "<$tag$attribs>$content</$tag>";
+    length($content)
+    ? "<$tag$attribs>$content</$tag>"
+    : "<$tag$attribs/>";
 }
 
 sub phrase_func_bold {
@@ -190,7 +194,7 @@ sub parse_phrase_func_args_html {
     my ($self, $args) = @_;
     my ($class, $attrib, $content) = ([], [], '');
     $args =~ s/^ //;
-    if ($args =~ /\A:((?:\\:|[^\:])*):((?s:.*))\z/) {
+    if ($args =~ /\A((?:\\:|[^\:])*):((?s:.*))\z/) {
         $attrib = $1;
         $content = $2;
         $attrib =~ s/\\:/:/g;
@@ -208,6 +212,9 @@ sub parse_attrib {
     while (length $text) {
         if ($text =~ s/^\s*(\w[\w\-]*)(?=\s|\z)\s*//) {
             push @$class, $1;
+        }
+        elsif ($text =~ s/^\s*(\w[\w\-]*="[^"]*")(?=\s|\z)s*//) {
+            push @$attrib, $1;
         }
         elsif ($text =~ s/^\s*(\w[\w\-]*=\S+)(?=\s|\z)s*//) {
             push @$attrib, $1;

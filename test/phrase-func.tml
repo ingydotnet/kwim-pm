@@ -1,131 +1,159 @@
-=== Phrases: simple
+=== Phrase function: simple
 --- kwim
 <bold content>
 --- html
 <p><strong>content</strong></p>
 
-=== Phrases: empty argument
+=== Phrase function: simple with single attribute
 --- kwim
-<bold::content>
---- html
-<p><strong>content</strong></p>
-
-=== Phrases: simple with single argument
---- kwim
-<bold:important:content>
+<bold important:content>
 --- html
 <p><strong class="important">content</strong></p>
 
-=== Phrases: simple with multiple arguments
+=== Phrase function: simple with multiple attributes
 --- kwim
-<bold:quite important:content>
+<bold quite important:content>
 --- html
 <p><strong class="quite important">content</strong></p>
 
-=== Phrases: key-value argument
+=== Phrase function: key-value attribute
 --- kwim
-<bold:id="item32":content>
+<bold id=item32:content>
 --- html
 <p><strong id="item32">content</strong></p>
 
-=== Phrases: key-value argument
+=== Phrase function: key-quoted-value attribute
 --- kwim
-<bold:id="item32":content>
+<bold id="item32":content>
 --- html
 <p><strong id="item32">content</strong></p>
 
-=== Phrases: key-value argument; escaped colon
+=== Phrase function: key-value attribute; escaped colon
 --- kwim
-<bold:id="item3\:2":content>
+<bold id=item3\:2:content>
 --- html
 <p><strong id="item3:2">content</strong></p>
 
-=== Phrases: argument plus leading space
+=== Phrase function: key-quoted-value attribute; with space
 --- kwim
-<bold:quite important: content>
+<bold title="A foo bar":content>
+--- html
+<p><strong title="A foo bar">content</strong></p>
+
+=== Phrase function: attribute plus leading space
+--- kwim
+<bold quite important: content>
 --- html
 <p><strong class="quite important"> content</strong></p>
 
-=== Phrases: argument plus trailing space
+=== Phrase function: attribute plus trailing space
 --- kwim
-<bold:quite important:content >
+<bold quite important:content >
 --- html
 <p><strong class="quite important">content </strong></p>
-# XXX - I think the space should be preserved here
-# <p><strong class="quite important">content</strong></p>
 
-=== Phrases: leading colon
---- LAST
+=== Phrase function: leading colon
 --- kwim
-<bold :leading>
+<bold ::leading>
 --- html
 <p><strong>:leading</strong></p>
 
-
-# XXX - I don't like this syntax decision. @pdl, we should discuss.
-=== Phrases: lots of colons in content
+=== Phrase function: lots of colons in content
 --- kwim
-<bold :colons:everywhere:>
+<bold ::colons:everywhere:>
 --- html
 <p><strong>:colons:everywhere:</strong></p>
 
-=== Phrases: lots of colons in content; empty arg
+=== Phrase function: lots of colons in content; no leading space
 --- kwim
-<bold:::colons:everywhere:>
+<bold::colons:everywhere:>
 --- html
 <p><strong>:colons:everywhere:</strong></p>
 
-=== Phrases: args and colons in content
+=== Phrase function: attributes and colons in content
 --- kwim
-<bold:important::colons:everywhere:>
+<bold important::colons:everywhere:>
 --- html
 <p><strong class="important">:colons:everywhere:</strong></p>
 
-=== Phrases: no content
+=== Phrase function: no content
 --- kwim
 <bold>
 --- html
 <p><strong/></p>
 
-=== Phrases: args but no content
+=== Phrase function: no content: one space
 --- kwim
-<bold:important:>
+<bold >
+--- html
+<p><strong/></p>
+
+=== Phrase function: no content: two spaces
+--- SKIP
+--- kwim
+<bold  >
+--- html
+<p><strong> </strong></p>
+
+=== Phrase function: attributes but no content
+--- kwim
+<bold important:>
 --- html
 <p><strong class="important"/></p>
 
-=== Phrases: arg but no content, no trailing colon
+=== Phrase function: attribute but no content, no trailing colon
+--- LAST
 --- kwim
-<bold:important>
+<bold important:>
 --- html
 <p><strong class="important"/></p>
 
-=== Phrases: args but no content, no trailing colon, spaces in args
+=== Phrase function: attributes but no content, no trailing colon, spaces in attributes
 --- kwim
+<bold quite important:>
 <bold: quite important >
 --- html
 <p><strong class="quite important"/></p>
 
-=== Phrases: no name
+=== Phrase function: span (no name)
 --- kwim
 <:important:content>
 --- html
 <p><span class="important">content</span></p>
 
-=== Phrases: nested
+=== Phrase function: empty span
+--- kwim
+<:>
+--- html
+<p><span/></p>
+
+=== Phrase function: empty span with attribute
+--- kwim
+<:important:>
+--- html
+<p><span class="important"/></p>
+
+=== Phrase function: span with no attribute
+--- kwim
+<:content>
+--- html
+<p><span>content</span></p>
+
+=== Phrase function: nested
 --- kwim
 <bold <emph bold italic>>
 --- html
 <p><strong><em>bold italic</em></strong></p>
 
-=== Phrases: nested with class
+=== Phrase function: nested with class
 --- kwim
-<bold <emph:variable: bold italic>>
+<bold <emph variable: bold italic>>
 --- html
 <p><strong><em class="variable">bold italic</em></strong></p>
 
-=== Phrases: nested with angles in values
+=== Phrase function: nested with angles in attributes
 --- kwim
-<bold:data-info="<oops>":<emph bold italic>>
+<bold data-info="<oops>":<emph bold italic>>
 --- html
 <p><strong data-info="&lt;oops&gt;"><em>bold italic</em></strong></p>
 
