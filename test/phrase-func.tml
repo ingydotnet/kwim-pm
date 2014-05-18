@@ -1,0 +1,132 @@
+=== Phrases: simple
+--- kwim
+<bold content>
+--- html
+<p><strong>content</strong></p>
+
+=== Phrases: empty argument
+--- kwim
+<bold::content>
+--- html
+<p><strong>content</strong></p>
+
+=== Phrases: simple with single argument
+--- kwim
+<bold:important:content>
+--- html
+<p><strong class="important">content</strong></p>
+
+=== Phrases: simple with multiple arguments
+--- kwim
+<bold:quite important:content>
+--- html
+<p><strong class="quite important">content</strong></p>
+
+=== Phrases: key-value argument
+--- kwim
+<bold:id="item32":content>
+--- html
+<p><strong id="item32">content</strong></p>
+
+=== Phrases: key-value argument
+--- kwim
+<bold:id="item32":content>
+--- html
+<p><strong id="item32">content</strong></p>
+
+=== Phrases: key-value argument; escaped colon
+--- kwim
+<bold:id="item3\:2":content>
+--- html
+<p><strong id="item3:2">content</strong></p>
+
+=== Phrases: argument plus leading space
+--- kwim
+<bold:quite important: content>
+--- html
+<p><strong class="quite important"> content</strong></p>
+
+=== Phrases: argument plus trailing space
+--- kwim
+<bold:quite important:content >
+--- html
+<p><strong class="quite important">content </strong></p>
+# XXX - I think the space should be preserved here
+# <p><strong class="quite important">content</strong></p>
+
+=== Phrases: leading colon
+--- LAST
+--- kwim
+<bold :leading>
+--- html
+<p><strong>:leading</strong></p>
+
+
+# XXX - I don't like this syntax decision. @pdl, we should discuss.
+=== Phrases: lots of colons in content
+--- kwim
+<bold :colons:everywhere:>
+--- html
+<p><strong>:colons:everywhere:</strong></p>
+
+=== Phrases: lots of colons in content; empty arg
+--- kwim
+<bold:::colons:everywhere:>
+--- html
+<p><strong>:colons:everywhere:</strong></p>
+
+=== Phrases: args and colons in content
+--- kwim
+<bold:important::colons:everywhere:>
+--- html
+<p><strong class="important">:colons:everywhere:</strong></p>
+
+=== Phrases: no content
+--- kwim
+<bold>
+--- html
+<p><strong/></p>
+
+=== Phrases: args but no content
+--- kwim
+<bold:important:>
+--- html
+<p><strong class="important"/></p>
+
+=== Phrases: arg but no content, no trailing colon
+--- kwim
+<bold:important>
+--- html
+<p><strong class="important"/></p>
+
+=== Phrases: args but no content, no trailing colon, spaces in args
+--- kwim
+<bold: quite important >
+--- html
+<p><strong class="quite important"/></p>
+
+=== Phrases: no name
+--- kwim
+<:important:content>
+--- html
+<p><span class="important">content</span></p>
+
+=== Phrases: nested
+--- kwim
+<bold <emph bold italic>>
+--- html
+<p><strong><em>bold italic</em></strong></p>
+
+=== Phrases: nested with class
+--- kwim
+<bold <emph:variable: bold italic>>
+--- html
+<p><strong><em class="variable">bold italic</em></strong></p>
+
+=== Phrases: nested with angles in values
+--- kwim
+<bold:data-info="<oops>":<emph bold italic>>
+--- html
+<p><strong data-info="&lt;oops&gt;"><em>bold italic</em></strong></p>
+
+
