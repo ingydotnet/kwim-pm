@@ -1,8 +1,9 @@
 use strict;
 package Kwim::Markup;
+
 use Pegex::Base;
 use base 'Kwim::Tree';
-use XXX -with => 'YAML::XS';
+# use XXX -with => 'YAML::XS';
 
 has option => {};
 

@@ -1,0 +1,10 @@
+---
+version: 0.0.2
+date:    Sun May 18 17:03:33 PDT 2014
+changes:
+- Add pdf/man/dvi support
+---
+version: 0.0.1
+date:    Sun May 14 12:13:26 PDT 2014
+changes:
+- First Release

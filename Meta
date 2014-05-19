@@ -1,0 +1,31 @@
+=meta: 0.0.1
+
+name: Kwim
+version: 0.0.2
+abstract: Kwow What I Mean
+homepage: http://stardoc.org
+
+license: perl
+copyright: 2014. Ingy döt Net.
+author:
+  name: Ingy döt Net
+  email: ingy@cpan.org
+  github: ingydotnet
+  twitter: ingydotnet
+  freenode: ingy
+  homepage: http://ingy.net
+
+requires:
+  perl: 5.8.1
+  Pegex: 0.30
+  HTML::Escape: 0
+
+devel:
+  git: git@github.org/ingydotnet/pegex-pm
+  irc: irc.freenode.net/pegex
+  bug: https://github.com/ingydotnet/pegex-pm/issues/
+
+=cpan:
+  include_testml: 1
+
+=travis: perl

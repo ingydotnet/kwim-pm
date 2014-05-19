@@ -1,7 +1,8 @@
 use strict;
 package Kwim::Byte;
+
 use base 'Kwim::Markup';
-use XXX -with => 'YAML::XS';
+# use XXX -with => 'YAML::XS';
 
 sub render_node {
     my ($self, $hash) = @_;

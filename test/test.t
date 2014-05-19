@@ -1,3 +1,4 @@
+use lib 'inc';
 use lib '../pegex-pm/lib';
 use lib '../testml-pm/lib';
 
@@ -15,7 +16,6 @@ use Kwim::Byte;
 use Kwim::HTML;
 use Kwim::Markdown;
 use Kwim::Pod;
-use XXX;
 
 sub parse {
     my ($self, $kwim, $emitter) = @_;
@@ -27,7 +27,7 @@ sub parse {
         receiver => "Kwim::$emitter"->new,
         # debug => 1,
     );
-    # XXX($parser->grammar->tree);
+    # use XXX; XXX($parser->grammar->tree);
     str $parser->parse($kwim);
 }
 

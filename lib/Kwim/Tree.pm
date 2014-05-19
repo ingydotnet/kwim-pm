@@ -1,7 +1,8 @@
 use strict;
 package Kwim::Tree;
+
 use base 'Pegex::Tree';
-use XXX -with => 'YAML::XS';
+# use XXX -with => 'YAML::XS';
 
 sub got_block_blank {
     my ($self, $text) = @_;

@@ -1,7 +1,8 @@
 use strict;
 package Kwim::HTML;
+
 use base 'Kwim::Markup';
-use XXX -with => 'YAML::XS';
+# use XXX -with => 'YAML::XS';
 
 use HTML::Escape;
 
