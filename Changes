@@ -1,4 +1,9 @@
 ---
+version: 0.0.3
+date:    Sun May 18 23:21:31 PDT 2014
+changes:
+- Call perl with $^X. @eserte++
+---
 version: 0.0.2
 date:    Sun May 18 17:03:33 PDT 2014
 changes:
