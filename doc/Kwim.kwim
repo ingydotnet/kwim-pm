@@ -50,9 +50,9 @@ Here are a few points:
   parse using a different syntax grammar. For instance, you could inline a
   markdown section like this:
 
-    .markdown
+    <<< markdown
     This is [Markdown](http://daringfireball.net/projects/markdown/) text.
-    :markdown
+    >>>
 
 * Multiple Implementations:
 
@@ -101,12 +101,12 @@ into more phrases.
 Consider this example document:
 
   A paragraph *is* a block. It gets divided into phrases like 'pure text' and
-  bold text. A bold phrase can be divided: *all bold /some italic/*.
+  *bold text*. A bold phrase can be divided: *all bold /some italic/*.
 
   * Lists are blocks.
   * Each item is a block.
-    + A sublist is a block.
-    + The text within in contains *phrases*.
+    * A sublist is a block.
+    * The text within in contains *phrases*.
 
 Common blocks and phrases have an implicit (DWIM) syntax, that reads very
 natural. For instance a paragraph is just left justified text that is
@@ -116,9 +116,9 @@ is an implicit syntax example followed by its explicit equivalent:
 
   A paragraph with some *bold text* in it.
 
-  .para
-  A paragraph with some {bold: bold text} in it.
-  :para
+  <<< para
+  A paragraph with some <bold bold text> in it.
+  >>>
 
 === Two Space Indent
 
@@ -128,7 +128,7 @@ this list:
 
   * Point one has
     text on 2 lines
-    + Subpoint a
+    * Subpoint a
   * Point two
 
     A paragraph for point 2 followed by some preformatted text:
@@ -148,19 +148,4 @@ block / explicit and phrase / explicit. There are also escaping mechanisms.
 A paragraph is a set of contiguous set of plain text lines. It is terminated
 by a blank line or by another block syntax at that level.
 
-.side-by-side
-(pre Kwim)
-This is a paragraph of
-a few lines. As you can
-see, the newlines are
-not considered hard in
-HTML.
-
-Another paragraph.
-(kwim HTML)
-This is a paragraph of a few lines. As you can see, the newlines are not
-considered hard in HTML.
-
-Another paragraph.
-:side-by-side
-
+/To be continued/
