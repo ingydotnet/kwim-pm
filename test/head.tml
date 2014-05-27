@@ -1,4 +1,5 @@
 === Name / Abstract Title
+--- ONLY
 --- kwim
 New::Black
 \==========
@@ -21,6 +22,15 @@ Back in black, hit the sack.
 +para
  Back in black, hit the sack.
 -para
+--- markdown
+New::Black
+\==========
+
+Is Still Black
+
+\# Synopsis
+
+Back in black, hit the sack.
 --- pod
 =head1 Name
 
@@ -128,3 +138,17 @@ Paragraph text
 
     preformatted text
 
+=== Markup in Title
+--- kwim
+`Foo`
+\=====
+
+The *New* Foo
+
+Start
+--- pod
+=head1 Name
+
+C<Foo> - The B<New> Foo
+
+Start

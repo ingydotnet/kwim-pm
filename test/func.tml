@@ -1,6 +1,8 @@
 === Travis badge for pod
 --- kwim
 <badge-travis ingydotnet/kwim-pm>
+--- markdown
+[![Travis build status](https://travis-ci.org/ingydotnet/kwim-pm.png?branch=master)](https://travis-ci.org/ingydotnet/kwim-pm)
 --- pod
 =for html
 <a href="https://travis-ci.org/ingydotnet/kwim-pm"><img src="https://travis-ci.org/ingydotnet/kwim-pm.png" alt="kwim-pm"></a>

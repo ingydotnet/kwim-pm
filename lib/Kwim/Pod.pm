@@ -44,10 +44,12 @@ sub render_blank { '' }
 
 sub render_title {
     my ($self, $node, $number) = @_;
-    my ($name, $text) = ref $node ? @$node : (undef, $node);
+    my ($name, $abstract) = ref $node ? @$node : (undef, $node);
     my $label = $self->option->{'pod-upper-head'} ? 'NAME' : 'Name';
-    if (defined $text) {
-        "=head1 $label\n\n$name - $text\n";
+    $name = $self->render($name);
+    if (defined $abstract) {
+        $abstract = $self->render($abstract);
+        "=head1 $label\n\n$name - $abstract\n";
     }
     else {
         "=head1 $name\n";

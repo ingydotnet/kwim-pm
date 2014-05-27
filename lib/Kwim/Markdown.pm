@@ -9,7 +9,6 @@ use constant top_block_separator => "\n";
 
 sub render_text {
     my ($self, $text) = @_;
-    chomp $text;
     $text =~ s/\n/ /g;
     return $text;
 }
@@ -21,10 +20,17 @@ sub render_para {
 }
 
 sub render_title {
-    my ($self, $node) = @_;
-    my $out = $self->render($node);
-    my $len = length $out;
-    return "$out\n" . ('=' x $len) . "\n";
+    my ($self, $node, $number) = @_;
+    my ($name, $abstract) = ref $node ? @$node : (undef, $node);
+    $name = $self->render($name);
+    my $under = '=' x length $name;
+    if (defined $abstract) {
+        $abstract = $self->render($abstract);
+        "$name\n$under\n\n$abstract\n";
+    }
+    else {
+        "$name\n$under\n";
+    }
 }
 
 sub render_head {
@@ -63,6 +69,20 @@ sub render_pref {
     $out;
 }
 
+sub render_func {
+    my ($self, $node) = @_;
+    if ($node =~ /^([\-\w]+)(?:[\ \:]|\z)((?s:.*)?)$/) {
+        my ($name, $args) = ($1, $2);
+        $name =~ s/-/_/g;
+        my $method = "phrase_func_$name";
+        if ($self->can($method)) {
+            my $out = $self->$method($args);
+            return $out if defined $out;
+        }
+    }
+    "<$node>";
+}
+
 sub render_blank { '' }
 
 sub render_comment { '' }
@@ -99,6 +119,12 @@ sub render_link {
     (length $text == 0)
     ? "[$link]($link)"
     : "[$text]($link)";
+}
+
+sub phrase_func_badge_travis {
+    my ($self, $args) = @_;
+    return unless $args =~ /^(\S+)\/(\S+)$/;
+    qq{[![Travis build status](https://travis-ci.org/$args.png?branch=master)](https://travis-ci.org/$args)};
 }
 
 1;

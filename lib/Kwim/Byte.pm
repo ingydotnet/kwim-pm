@@ -27,9 +27,11 @@ sub render_text {
 
 sub render_title {
     my ($self, $node) = @_;
-    my ($name, $text) = ref $node ? @$node : (undef, $node);
-    if (defined $text) {
-        "+title\n $name\n-title\n+para\n $text\n-para\n";
+    my ($name, $abstract) = ref $node ? @$node : (undef, $node);
+    $name = @$name > 1 ? $self->render($name) : $name->[0];
+    if (defined $abstract) {
+        $abstract = @$abstract > 1 ? $self->render($abstract) : $abstract->[0];
+        "+title\n $name\n-title\n+para\n $abstract\n-para\n";
     }
     else {
         "+title\n $name\n-title\n";

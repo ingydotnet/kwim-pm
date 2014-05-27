@@ -10,6 +10,8 @@ I like pie
 -bold
   coffee.
 -para
+--- markdown
+I like pie **and** coffee.
 --- pod
 I like pie B<and> coffee.
 
