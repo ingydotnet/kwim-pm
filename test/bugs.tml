@@ -10,3 +10,16 @@
 -code
 -item
 -list
+
+=== '::' in data paragraph
+--- kwim
+- Dump
+  Data::Dumper is OK
+--- pod
+=over
+
+=item Dump
+
+Data::Dumper is OK
+
+=back

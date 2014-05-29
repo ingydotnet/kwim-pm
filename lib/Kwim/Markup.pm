@@ -27,7 +27,7 @@ sub final {
 }
 
 sub render {
-    my ($self, $node) = @_;
+    my ($self, $node, $separator) = @_;
     my $out;
     if (not ref $node) {
         $out = $self->render_text($node);
@@ -36,8 +36,9 @@ sub render {
         $out = $self->render_node($node);
     }
     else {
-        my $sep = $self->at_top_level ? $self->top_block_separator : '';
-        $out = join $sep, grep $_, map { $self->render($_) } @$node;
+        $separator ||=
+            $self->at_top_level ? $self->top_block_separator : '';
+        $out = join $separator, grep $_, map { $self->render($_) } @$node;
     }
     return $out;
 }

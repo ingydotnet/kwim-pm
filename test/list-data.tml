@@ -42,3 +42,19 @@ No definition, just a paragraph
 =back
 
 =back
+
+=== Multi-level item
+--- kwim
+- this
+    $a = $b
+  See?
+--- pod
+=over
+
+=item this
+
+    $a = $b
+
+See?
+
+=back

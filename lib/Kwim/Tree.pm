@@ -58,7 +58,7 @@ sub got_block_list_data {
     my $items = [
         map {
             my ($term, $def, $rest);
-            if (s/(.*?)\s*::\s*(\S.*)\n//) {
+            if (s/(.*?) :: +(\S.*)\n//) {
                 ($term, $def, $rest) = ($1, $2, $_);
                 $def = $self->collapse($self->parse($def));
             }

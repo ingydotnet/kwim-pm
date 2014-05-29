@@ -154,7 +154,7 @@ sub render_data {
             $out .= $self->render($def) . "\n\n";
         }
         if ($rest) {
-            $out .= $self->render($rest) . "\n";
+            $out .= $self->render($rest, "\n") . "\n";
         }
     }
     $out . "=back\n";
