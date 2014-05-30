@@ -4,8 +4,29 @@ use lib '../testml-pm/lib';
 
 use TestML;
 
+my $testml = join('', <DATA>);
+
+if (@ARGV) {
+    $testml =~ s/^/# /gm;
+    $testml =~ s/^# //m for 1..5;
+    for (@ARGV) {
+        if (/^(byte|html|pod|markdown)$/) {
+            $testml =~ s/^# (Label.*\n)# (.*\*$_)$/$1$2/m;
+        }
+        elsif (/^diff$/) {
+            $testml =~ s/^#(Diff )/$1/m;
+        }
+        else {
+            s/\.tml$//;
+            s/.*test\///;
+            $testml =~ s/^# (%Include $_\.tml)$/$1/m;
+        }
+    }
+}
+
+
 TestML->new(
-    testml => join('', <DATA>),
+    testml => $testml,
     bridge => 'main',
 )->run;
 
@@ -32,11 +53,10 @@ sub parse {
 }
 
 __DATA__
-
 %TestML 0.1.0
 
-# Diff = 1
-# Plan = 4
+#Diff = 1
+#Plan = 4
 
 Label = 'Kwim to ByteCode - $BlockLabel'
 *kwim.parse('Byte') == *byte
