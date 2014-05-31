@@ -51,6 +51,7 @@ cpan:
 
 cpanshell: cpan
 	(cd cpan; $$SHELL)
+	rm -fr cpan
 
 dist: clean cpan
 	(cd cpan; dzil build)

@@ -20,7 +20,6 @@ my $info = {
 
 sub render_text {
     my ($self, $text) = @_;
-    chomp $text;
     $text =~ s/\n/ /g;
     escape_html($text);
 }

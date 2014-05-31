@@ -102,13 +102,13 @@
 <p><strong class="important"/></p>
 
 === Phrase function: attribute but no content, no trailing colon
---- LAST
 --- kwim
 <bold important:>
 --- html
 <p><strong class="important"/></p>
 
 === Phrase function: attributes but no content, no trailing colon, spaces in attributes
+--- SKIP
 --- kwim
 <bold quite important:>
 <bold: quite important >
@@ -116,42 +116,49 @@
 <p><strong class="quite important"/></p>
 
 === Phrase function: span (no name)
+--- SKIP
 --- kwim
 <:important:content>
 --- html
 <p><span class="important">content</span></p>
 
 === Phrase function: empty span
+--- SKIP
 --- kwim
 <:>
 --- html
 <p><span/></p>
 
 === Phrase function: empty span with attribute
+--- SKIP
 --- kwim
 <:important:>
 --- html
 <p><span class="important"/></p>
 
 === Phrase function: span with no attribute
+--- SKIP
 --- kwim
 <:content>
 --- html
 <p><span>content</span></p>
 
 === Phrase function: nested
+--- SKIP
 --- kwim
 <bold <emph bold italic>>
 --- html
 <p><strong><em>bold italic</em></strong></p>
 
 === Phrase function: nested with class
+--- SKIP
 --- kwim
 <bold <emph variable: bold italic>>
 --- html
 <p><strong><em class="variable">bold italic</em></strong></p>
 
 === Phrase function: nested with angles in attributes
+--- SKIP
 --- kwim
 <bold data-info="<oops>":<emph bold italic>>
 --- html
