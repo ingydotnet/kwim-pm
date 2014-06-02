@@ -19,6 +19,11 @@ sub got_line_comment {
     $self->add(comment => $text);
 }
 
+sub got_block_rule {
+    my ($self, $text) = @_;
+    $self->add(rule => '');
+}
+
 sub got_block_head {
     my ($self, $got) = @_;
     my $marker = shift @$got;
@@ -102,7 +107,7 @@ sub got_block_para {
 
 sub got_phrase_func {
     my ($self, $content) = @_;
-    +{func => join '', @$content};
+    +{func => $content};
 }
 
 sub got_phrase_code {

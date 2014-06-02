@@ -32,6 +32,10 @@ sub render_para {
     "<p>$spacer$out$spacer</p>\n";
 }
 
+sub render_rule {
+    "<hr/>\n";
+}
+
 sub render_blank {
     "<br/>\n";
 }
