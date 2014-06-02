@@ -5,16 +5,22 @@ use lib '../testml-pm/lib';
 use TestML;
 
 my $testml = join('', <DATA>);
+my $debug = 0;
 
 if (@ARGV) {
     $testml =~ s/^/# /gm;
     $testml =~ s/^# //m for 1..5;
+    my $markup = 0;
     for (@ARGV) {
         if (/^(byte|html|pod|markdown)$/) {
             $testml =~ s/^# (Label.*\n)# (.*\*$_)$/$1$2/m;
+            $markup = 1;
         }
         elsif (/^diff$/) {
             $testml =~ s/^#(Diff )/$1/m;
+        }
+        elsif (/^debug$/) {
+            $debug = 1;
         }
         else {
             s/\.tml$//;
@@ -22,6 +28,7 @@ if (@ARGV) {
             $testml =~ s/^# (%Include $_\.tml)$/$1/m;
         }
     }
+    $testml =~ s/^# (Label.*\n)# (.*)$/$1$2/gm unless $markup;
 }
 
 
@@ -40,13 +47,12 @@ use Kwim::Pod;
 
 sub parse {
     my ($self, $kwim, $emitter) = @_;
-    # local $ENV{PERL_PEGEX_DEBUG} = 1;
     $kwim = $kwim->{value};
     $emitter = $emitter->{value};
     my $parser = Pegex::Parser->new(
         grammar => 'Kwim::Grammar'->new,
         receiver => "Kwim::$emitter"->new,
-        # debug => 1,
+        debug => $debug,
     );
     # use XXX; XXX($parser->grammar->tree);
     str $parser->parse($kwim);
@@ -72,6 +78,7 @@ Label = 'Kwim to Pod - $BlockLabel'
 %Include list.tml
 %Include list-data.tml
 %Include head.tml
+%Include block.tml
 %Include phrase.tml
 %Include phrase-func.tml
 %Include hyper.tml
