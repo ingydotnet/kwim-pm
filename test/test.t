@@ -6,6 +6,7 @@ use TestML;
 
 my $testml = join('', <DATA>);
 my $debug = 0;
+my $tree = 0;
 
 if (@ARGV) {
     $testml =~ s/^/# /gm;
@@ -21,6 +22,9 @@ if (@ARGV) {
         }
         elsif (/^debug$/) {
             $debug = 1;
+        }
+        elsif (/^tree$/) {
+            $tree = 1;
         }
         else {
             s/\.tml$//;
@@ -54,7 +58,8 @@ sub parse {
         receiver => "Kwim::$emitter"->new,
         debug => $debug,
     );
-    # use XXX; XXX($parser->grammar->tree);
+    eval 'use XXX; XXX($parser->grammar->tree)'
+      if $tree;
     str $parser->parse($kwim);
 }
 
