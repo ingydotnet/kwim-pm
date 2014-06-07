@@ -1,4 +1,9 @@
 ---
+version: 0.0.6
+date:    Sat Jun  7 09:04:44 PDT 2014
+changes:
+- Remove ABSTRACT comment
+---
 version: 0.0.5
 date:    Sat May 31 18:19:29 EDT 2014
 changes:

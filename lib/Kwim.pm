@@ -1,4 +1,3 @@
-# ABSTRACT: Known What I Mean
 package Kwim;
 
 use Pegex::Parser;
