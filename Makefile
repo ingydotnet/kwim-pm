@@ -7,6 +7,10 @@
 
 .PHONY: cpan doc test
 
+ifeq (,$(shell which zild))
+    $(error "Error: 'zild' command not found. Please install Zilla::Dist from CPAN")
+endif
+
 NAME := $(shell zild meta name)
 VERSION := $(shell zild meta version)
 DISTDIR := $(NAME)-$(VERSION)
@@ -78,6 +82,7 @@ publish release: doc test check-release disttest
 	git tag $(VERSION)
 	git push --tag
 	rm $(DIST)
+	git status
 
 preflight: doc test check-release disttest
 	make dist
@@ -86,6 +91,7 @@ preflight: doc test check-release disttest
 	@echo git tag $(VERSION)
 	@echo git push --tag
 	rm $(DIST)
+	git status
 
 clean purge:
 	rm -fr cpan .build $(DIST) $(DISTDIR)
