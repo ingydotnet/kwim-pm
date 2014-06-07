@@ -28,10 +28,6 @@ Kwim is a plain text markup language that converts to many formats:
 
 =back
 
-=item * Manpage
-
-=item * DocBook
-
 =item * MarkDown
 
 =over
@@ -41,6 +37,12 @@ Kwim is a plain text markup language that converts to many formats:
 =back
 
 =item * Pod
+
+=item * DocBook
+
+=item * Pod
+
+=item * Manpage
 
 =item * AsciiDoc
 
@@ -128,7 +130,7 @@ endings: period, exclamation point and question mark. We leave those alone (at
 least in the normal prose context).
 
 This leaves a bunch of punctuation characters that we can do special things
-with. Namely: C<< @#$%^&*=+|/~[]<>{} >>. Sometimes context matters. For
+with. Namely: C<< @#$%^&*_=+|/~[]<>{} >>. Sometimes context matters. For
 instance it is very rare for a prose line to start with a period, so we can
 use that as a markup.
 
@@ -148,7 +150,7 @@ Consider this example document:
 
     A paragraph *is* a block. It gets divided into phrases like 'pure text' and
     *bold text*. A bold phrase can be divided: *all bold /some italic/*.
-    
+
     * Lists are blocks.
     * Each item is a block.
       * A sublist is a block.
@@ -161,7 +163,7 @@ phrases. Every implicit syntax can be written explicitly. For instance, here
 is an implicit syntax example followed by its explicit equivalent:
 
     A paragraph with some *bold text* in it.
-    
+
     <<< para
     A paragraph with some <bold bold text> in it.
     >>>
@@ -176,7 +178,7 @@ this list:
       text on 2 lines
       * Subpoint a
     * Point two
-    
+
       A paragraph for point 2 followed by some preformatted text:
         # Code example
     * Point three

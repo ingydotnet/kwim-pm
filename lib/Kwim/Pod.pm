@@ -67,7 +67,7 @@ sub render_pref {
     my ($self, $node) = @_;
     my $out = $node;
     chomp $out;
-    $out =~ s/^/    /gm;
+    $out =~ s/^(.)/    $1/gm;
     "$out\n";
 }
 

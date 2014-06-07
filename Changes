@@ -1,4 +1,9 @@
 ---
+version: 0.0.7
+date:    Sat Jun  7 12:26:51 PDT 2014
+changes:
+- don't indent blank lines in Pod
+---
 version: 0.0.6
 date:    Sat Jun  7 09:04:44 PDT 2014
 changes:

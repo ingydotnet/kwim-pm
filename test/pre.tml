@@ -1,0 +1,14 @@
+=== Preformatted with Blank Lines
+--- kwim
+Code:
+
+  a = b
+
+  b = c
+
+--- pod
+Code:
+
+    a = b
+
+    b = c
