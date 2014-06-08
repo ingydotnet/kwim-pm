@@ -93,3 +93,25 @@ Paragraph 1
 =back
 
 Paragraph 2
+
+=== List with Paragraphs
+--- kwim
+* foo
+
+  Foo is ok
+
+* bar
+
+  Bar is too far
+--- pod
+=over
+
+=item * foo
+
+Foo is ok
+
+=item * bar
+
+Bar is too far
+
+=back

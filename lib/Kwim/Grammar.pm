@@ -41,7 +41,7 @@ sub make_tree {
       ]
     },
     'block_list_bullet' => {
-      '.rgx' => qr/\G(\*\ .*\r?\n(?:\*\ .*\r?\n|(?:\ *\r?\n)*\ \ .*\r?\n)*(?:\ *\r?\n)?)/
+      '.rgx' => qr/\G(\*\ .*\r?\n(?:\*\ .*\r?\n|(?:\ *\r?\n)|\ \ .*\r?\n)*(?:\ *\r?\n)?)/
     },
     'block_list_data' => {
       '.rgx' => qr/\G(\-\ .*\r?\n(?:\-\ .*\r?\n|(?:\ *\r?\n)|\ \ .*\r?\n)*)/
@@ -79,7 +79,7 @@ sub make_tree {
       ]
     },
     'block_list_number' => {
-      '.rgx' => qr/\G(\+\ .*\r?\n(?:\+\ .*\r?\n|(?:\ *\r?\n)*\ \ .*\r?\n)*(?:\ *\r?\n)?)/
+      '.rgx' => qr/\G(\+\ .*\r?\n(?:\+\ .*\r?\n|(?:\ *\r?\n)|\ \ .*\r?\n)*(?:\ *\r?\n)?)/
     },
     'block_para' => {
       '.rgx' => qr/\G((?:(?![\ \*=\#\n]\ ).*\S.*(?:\r?\n|\z))+)(?:\ *\r?\n)?/
@@ -157,6 +157,9 @@ sub make_tree {
     },
     'marker_next' => {
       '.rgx' => qr/\G([\s\S])/
+    },
+    'marker_under' => {
+      '.rgx' => qr/\G_/
     },
     'phrase_bold' => {
       '.all' => [
@@ -292,6 +295,9 @@ sub make_tree {
           '.ref' => 'phrase_del'
         },
         {
+          '.ref' => 'phrase_under'
+        },
+        {
           '.ref' => 'phrase_hyper'
         },
         {
@@ -304,6 +310,28 @@ sub make_tree {
     },
     'phrase_text' => {
       '.rgx' => qr/\G((?:(?![<`\*\/\-\-"\[\\]|https?:)[\s\S])+)/
+    },
+    'phrase_under' => {
+      '.all' => [
+        {
+          '.rgx' => qr/\G_(?=\S)(?!_)/
+        },
+        {
+          '+min' => 1,
+          '.all' => [
+            {
+              '+asr' => -1,
+              '.ref' => 'marker_under'
+            },
+            {
+              '.ref' => 'phrase_markup'
+            }
+          ]
+        },
+        {
+          '.ref' => 'marker_under'
+        }
+      ]
     },
     'text_markup' => {
       '+min' => 1,
