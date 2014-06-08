@@ -1,4 +1,9 @@
 ---
+version: 0.0.10
+date:    Sun Jun  8 12:17:04 PDT 2014
+changes:
+- Add badge-coveralls support
+---
 version: 0.0.9
 date:    Sun Jun  8 11:53:26 PDT 2014
 changes:

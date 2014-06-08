@@ -5,6 +5,8 @@ Know What I Mean?!
 
 <badge-travis ingydotnet/kwim-pm>
 
+<badge-coveralls ingydotnet/kwim-pm>
+
 = Description
 
 Kwim is a plain text markup language that converts to many formats:

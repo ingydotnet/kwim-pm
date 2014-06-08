@@ -185,4 +185,11 @@ sub phrase_func_badge_travis {
     qq{=for html\n<a href="https://travis-ci.org/$args"><img src="https://travis-ci.org/$args.png" alt="$repo"></a>\n\n}
 }
 
+sub phrase_func_badge_coveralls {
+    my ($self, $args) = @_;
+    return unless $args =~ /^(\S+)\/(\S+)$/;
+    my $repo = $2;
+    qq{=for html\n<a href="https://coveralls.io/r/$args?branch=master"><img src="https://coveralls.io/repos/$args/badge.png" alt="$repo"></a>\n\n}
+}
+
 1;
