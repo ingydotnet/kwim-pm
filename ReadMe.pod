@@ -10,6 +10,9 @@ See http://github.com/ingydotnet/kwim-pm#readme
 
 kwim - Know What I Mean?!
 
+=for html
+<a href="https://travis-ci.org/ingydotnet/kwim-pm"><img src="https://travis-ci.org/ingydotnet/kwim-pm.png" alt="kwim-pm"></a>
+
 =head1 DESCRIPTION
 
 Kwim is a plain text markup language that converts to many formats:

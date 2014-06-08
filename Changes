@@ -1,4 +1,9 @@
 ---
+version: 0.0.9
+date:    Sun Jun  8 11:53:26 PDT 2014
+changes:
+- Add travis badge
+---
 version: 0.0.8
 date:    Sun Jun  8 10:01:12 PDT 2014
 changes:
