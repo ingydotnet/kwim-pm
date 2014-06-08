@@ -13,6 +13,9 @@ kwim - Know What I Mean?!
 =for html
 <a href="https://travis-ci.org/ingydotnet/kwim-pm"><img src="https://travis-ci.org/ingydotnet/kwim-pm.png" alt="kwim-pm"></a>
 
+ =for html
+<a href="https://coveralls.io/r/ingydotnet/kwim-pm?branch=master"><img src="https://coveralls.io/repos/ingydotnet/kwim-pm/badge.png" alt="kwim-pm"></a>
+
 =head1 DESCRIPTION
 
 Kwim is a plain text markup language that converts to many formats:
@@ -71,20 +74,12 @@ all of them.
 Most of the other markups don't support things like multiple paragraphs in a
 bullet point (like you are reading right now!).
 
-=back
-
-=over
-
 =item * Simple, consistent markup:
 
 Even though Kwim intends to be very rich, it will use a simple set of syntax
 idioms to accomplish its tasks. One of my favorite sayings comes from Larry
 Wall of Perl fame: "Make simple things simple and hard things possible". Kwim
 does just that (hopefully without looking too much like Perl ;).
-
-=back
-
-=over
 
 =item * Extensible:
 
@@ -96,10 +91,6 @@ markdown section like this:
     This is [Markdown](http://daringfireball.net/projects/markdown/) text.
     >>>
 
-=back
-
-=over
-
 =item * Multiple Implementations:
 
 Kwim is written using the Pegex parser framework. This provides 2 very
@@ -107,10 +98,6 @@ powerful concepts. Firstly, that Kwim language is defined in a very simple PEG
 topdown grammar. That means it is easy to grok, maintain and extend. Second,
 Pegex parsers work in many languages. That means that you can use Pegex
 natively in languages like Ruby, JavaScript, Perl, Python and many others.
-
-=back
-
-=over
 
 =item * Comments and blank lines:
 
