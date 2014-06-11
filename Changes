@@ -1,4 +1,9 @@
 ---
+version: 0.0.11
+date:    Wed Jun 11 11:10:01 PDT 2014
+changes:
+- Update the doc with author/copyright sections.
+---
 version: 0.0.10
 date:    Sun Jun  8 12:17:04 PDT 2014
 changes:
