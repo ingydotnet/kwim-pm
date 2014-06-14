@@ -1,4 +1,9 @@
 ---
+version: 0.0.13
+date:    Sat Jun 14 13:48:55 PDT 2014
+changes:
+- Fix metadata errors
+---
 version: 0.0.12
 date:    Sat Jun 14 11:50:57 PDT 2014
 changes:

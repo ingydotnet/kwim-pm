@@ -1,7 +1,7 @@
 =meta: 0.0.1
 
 name: Kwim
-version: 0.0.12
+version: 0.0.13
 abstract: Know What I Mean
 homepage: http://kwim.org
 
@@ -21,9 +21,9 @@ requires:
   HTML::Escape: 0
 
 devel:
-  git: git@github.org/ingydotnet/pegex-pm
-  irc: irc.freenode.net/pegex
-  bug: https://github.com/ingydotnet/pegex-pm/issues/
+  git: git@github.org/ingydotnet/kwim-pm
+  irc: irc.freenode.net/kwim
+  bug: https://github.com/ingydotnet/kwim-pm/issues/
 
 =cpan:
   include_testml: 1
