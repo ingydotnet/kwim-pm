@@ -12,8 +12,6 @@ kwim - Know What I Mean?!
 
 =for html
 <a href="https://travis-ci.org/ingydotnet/kwim-pm"><img src="https://travis-ci.org/ingydotnet/kwim-pm.png" alt="kwim-pm"></a>
-
-=for html
 <a href="https://coveralls.io/r/ingydotnet/kwim-pm?branch=master"><img src="https://coveralls.io/repos/ingydotnet/kwim-pm/badge.png" alt="kwim-pm"></a>
 
 =head1 DESCRIPTION
