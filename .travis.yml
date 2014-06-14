@@ -26,3 +26,9 @@ script:
 after_success:
 - cover -report coveralls
 
+notifications:
+  irc:
+    channels:
+    - irc.freenode.net#kwim
+    on_success: change
+    on_failure: always

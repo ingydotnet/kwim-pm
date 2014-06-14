@@ -31,3 +31,4 @@ devel:
 =travis:
   type: perl
   testml: yes
+  irc: irc.freenode.net#kwim
