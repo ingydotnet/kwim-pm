@@ -54,6 +54,25 @@ sub render_node {
     $out;
 }
 
+sub render_func {
+    my ($self, $node) = @_;
+    if ($node =~ /^([\-\w]+)(?:[\ \:]|\z)((?s:.*)?)$/) {
+        my ($name, $args) = ($1, $2);
+        (my $method = "phrase_func_$name") =~ s/-/_/g;
+        (my $plugin = "Kwim::Plugin::$name") =~ s/-/::/g;
+        while (1) {
+            if ($self->can($method)) {
+                my $out = $self->$method($args);
+                return $out if defined $out;
+            }
+            last if $plugin eq "Kwim::Plugin";
+            eval "require $plugin";
+            $plugin =~ s/(.*)::.*/$1/;
+        }
+    }
+    "<$node>";
+}
+
 sub at_top_level {
     @{$_[0]->{stack}} == 0
 }

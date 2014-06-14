@@ -1,4 +1,10 @@
 ---
+version: 0.0.12
+date:    Sat Jun 14 11:50:57 PDT 2014
+changes:
+- Add plugin support for phrase functions
+- Add new badge doc
+---
 version: 0.0.11
 date:    Wed Jun 11 11:10:01 PDT 2014
 changes:

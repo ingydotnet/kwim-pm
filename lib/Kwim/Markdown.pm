@@ -69,20 +69,6 @@ sub render_pref {
     $out;
 }
 
-sub render_func {
-    my ($self, $node) = @_;
-    if ($node =~ /^([\-\w]+)(?:[\ \:]|\z)((?s:.*)?)$/) {
-        my ($name, $args) = ($1, $2);
-        $name =~ s/-/_/g;
-        my $method = "phrase_func_$name";
-        if ($self->can($method)) {
-            my $out = $self->$method($args);
-            return $out if defined $out;
-        }
-    }
-    "<$node>";
-}
-
 sub render_blank { '' }
 
 sub render_comment { '' }
@@ -119,18 +105,6 @@ sub render_link {
     (length $text == 0)
     ? "[$link]($link)"
     : "[$text]($link)";
-}
-
-sub phrase_func_badge_travis {
-    my ($self, $args) = @_;
-    return unless $args =~ /^(\S+)\/(\S+)$/;
-    qq{[![Travis build status](https://travis-ci.org/$args.png?branch=master)](https://travis-ci.org/$args)};
-}
-
-sub phrase_func_badge_coveralls {
-    my ($self, $args) = @_;
-    return unless $args =~ /^(\S+)\/(\S+)$/;
-    qq{[![Coverage Status](https://coveralls.io/repos/$args/badge.png?branch=master)](https://coveralls.io/r/$args?branch=master)};
 }
 
 1;

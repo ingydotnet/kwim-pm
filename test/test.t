@@ -91,4 +91,3 @@ Label = 'Kwim to Pod - $BlockLabel'
 %Include link.tml
 %Include edge.tml
 %Include bugs.tml
-%Include func.tml
