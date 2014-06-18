@@ -32,3 +32,8 @@ notifications:
     - irc.freenode.net#kwim
     on_success: change
     on_failure: always
+
+# Hack to not run on tag pushes:
+branches:
+  except:
+  - /^v?[0-9]+\.[0-9]+/
