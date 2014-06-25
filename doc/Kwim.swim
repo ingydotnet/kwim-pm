@@ -5,6 +5,21 @@ Know What I Mean?!
 
 <badge travis coveralls ingydotnet/kwim-pm>
 
+= *** RENAME / DEPRECATION ***
+
+Due to a certain unfortunate homonym, *Kwim* has been replaced by (renamed to)
+[Swim].
+
+See:
+
+* [Swim]
+* http://swimtext.org
+* irc.freeenode.net#swimtext
+
+Eventually [Kwim] will be removed from CPAN.
+
+The existing documentation follows:
+
 = Description
 
 Kwim is a plain text markup language that converts to many formats:

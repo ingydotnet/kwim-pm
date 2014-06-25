@@ -1,4 +1,10 @@
 ---
+version: 0.0.15
+date:    Wed Jun 25 16:36:33 PDT 2014
+changes:
+- Kwim is dead. Long live Swim.
+- Add deprecation notices to doc and warn in bin/kwim.
+---
 version: 0.0.14
 date:    Wed Jun 18 10:57:49 PDT 2014
 changes:

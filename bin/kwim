@@ -27,6 +27,9 @@ my %opt_spec = (
 );
 
 sub main {
+
+  warn "WARNING: 'kwim' has been moved to 'swim'. Please adjust accordingly.\n\n";
+
   GetOptions(%opt_spec) or die "Error in command line arguments";
 
   my $format_mapping = {

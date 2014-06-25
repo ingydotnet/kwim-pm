@@ -1,9 +1,9 @@
 =meta: 0.0.1
 
 name: Kwim
-version: 0.0.14
+version: 0.0.15
 abstract: Know What I Mean
-homepage: http://kwim.org
+homepage: https://metacpan.org/release/Kwim
 
 license: perl
 copyright: 2014. Ingy döt Net.
