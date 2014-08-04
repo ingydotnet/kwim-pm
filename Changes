@@ -1,4 +1,10 @@
 ---
+version: 0.0.16
+date:    Sun Aug  3 23:21:43 PDT 2014
+changes:
+- Remove (c) from Copyright
+- Remove most of doc (deprecation)
+---
 version: 0.0.15
 date:    Wed Jun 25 16:36:33 PDT 2014
 changes:

@@ -1,4 +1,2 @@
 package Kwim;
-our $VERSION = '0.0.15';
-
-1;
+our $VERSION = '0.0.16';

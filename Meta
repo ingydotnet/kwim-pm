@@ -1,7 +1,7 @@
 =meta: 0.0.1
 
 name: Kwim
-version: 0.0.15
+version: 0.0.16
 abstract: Know What I Mean
 homepage: https://metacpan.org/release/Kwim
 
@@ -21,9 +21,9 @@ requires:
   HTML::Escape: 0
 
 devel:
-  git: git@github.org/ingydotnet/kwim-pm
-  irc: irc.freenode.net/kwim
-  bug: https://github.com/ingydotnet/kwim-pm/issues/
+  git: https://github.com/ingydotnet/kwim-pm
+  bug: https://github.com/ingydotnet/kwim-pm/issues
+  irc: irc.freenode.net#swimtext
 
 =cpan:
   include_testml: 1
@@ -31,4 +31,4 @@ devel:
 =travis:
   type: perl
   testml: yes
-  irc: irc.freenode.net#kwim
+  irc: irc.freenode.net#swimtext
