@@ -10,8 +10,6 @@
 -code
 -item
 -list
---- markdown
-* Foo `bar`
 --- pod
 =over
 

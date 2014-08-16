@@ -1,4 +1,9 @@
 ---
+version: 0.0.17
+date:    Fri Aug 15 18:36:44 PDT 2014
+changes:
+- Add t/000-compile-modules.t
+---
 version: 0.0.16
 date:    Sun Aug  3 23:21:43 PDT 2014
 changes:
