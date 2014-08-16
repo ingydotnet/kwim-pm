@@ -1,4 +1,9 @@
 ---
+version: 0.0.19
+date:    Sat Aug 16 14:05:49 PDT 2014
+changes:
+- Remove =travis section
+---
 version: 0.0.18
 date:    Sat Aug 16 11:28:24 PDT 2014
 changes:
