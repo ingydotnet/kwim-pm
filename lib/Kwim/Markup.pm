@@ -1,4 +1,3 @@
-use strict;
 package Kwim::Markup;
 
 use Pegex::Base;

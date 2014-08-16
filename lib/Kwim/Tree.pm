@@ -1,4 +1,4 @@
-use strict;
+use strict; use warnings;
 package Kwim::Tree;
 
 use base 'Pegex::Tree';

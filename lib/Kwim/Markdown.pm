@@ -1,4 +1,4 @@
-use strict;
+use strict; use warnings;
 package Kwim::Markdown;
 
 use base 'Kwim::Markup';

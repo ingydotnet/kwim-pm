@@ -1,4 +1,4 @@
-use strict;
+use strict; use warnings;
 package Kwim::Pod;
 
 use base 'Kwim::Markup';
