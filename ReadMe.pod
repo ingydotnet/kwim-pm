@@ -14,7 +14,7 @@ kwim - Know What I Mean?!
 <a href="https://travis-ci.org/ingydotnet/kwim-pm"><img src="https://travis-ci.org/ingydotnet/kwim-pm.png" alt="kwim-pm"></a>
 <a href="https://coveralls.io/r/ingydotnet/kwim-pm?branch=master"><img src="https://coveralls.io/repos/ingydotnet/kwim-pm/badge.png" alt="kwim-pm"></a>
 
-=head1 *** RENAME / DEPRECATION ***
+=head1 *** RENAME/DEPRECATION ***
 
 Due to a certain unfortunate homonym, B<Kwim> has been replaced by (renamed
 to) L<Swim>.
